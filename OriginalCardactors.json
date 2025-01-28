@@ -1,0 +1,16 @@
+{
+	"id": "OCs", 
+	"name": "Original Cardactors",
+	"author": ["Hellgnoll", "JuniperTheory"],
+	"description": "A grabbag of changes bespoken to patrons from another realm.",
+	"prefix": "ocs",
+	"main_file": "main.lua", 
+	"badge_colour": "d500b8",
+	"badge_text_colour": "000000",
+	"display_name": "OCs",
+	"version": "0.0.1",
+	"dependencies": [
+		"Steamodded (>=1.*~)",
+		"malverk (>=1.1~)"
+	]
+}
