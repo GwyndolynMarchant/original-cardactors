@@ -1,7 +1,7 @@
 AltTexture({
-  key = 'vampire_bat', -- the key of the texture
-  set = 'Joker', -- define the object type that you are retexturing, see wiki for full list of types
-  path = 'vampire.png', -- the filename of your spritesheet, saved in assets/1x AND assets/2x
+  key = 'vampire_bat',
+  set = 'Joker',
+  path = 'vampire.png',
   keys = {
     'j_vampire'
   },

@@ -1,0 +1,35 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+            "name": "Original Cardactors",
+        },
+	],
+    "build_systems":
+    [
+        {
+            "name": "Run Balatro",
+            "shell_cmd": "start steam://launch/2379780",
+        }
+	],
+    "settings":
+    {
+		"LSP":
+		{
+			"LSP-lua":
+			{
+				"settings":
+				{
+					"Lua.runtime.version": "LuaJIT",
+					"Lua.workspace.library":
+					[
+						"../Steamodded",
+						"../Malverk"
+					],
+					"Lua.workspace.checkThirdParty": "Disable",
+				},
+			},
+		},
+	},
+}
