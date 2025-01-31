@@ -19,9 +19,13 @@ return {
                 name = 'Raised Fist: Rebel Against Judgement',
                 text = {'The raised fist now','belongs to Billie Hellgnoll!'},
             },
-            alt_text_todo_hyena = {
+            alt_tex_ocs_todo_hyena = {
                 name = 'Todo List: HYENA',
                 text = {'The to-do list','spells out HYENA now'},
+            },
+            alt_tex_ocs_smol_blind = {
+                name = 'Small Blind: Smol Blind',
+                text = {'The blind is smol… uwu'}
             }
         },
         texture_packs = {
@@ -34,6 +38,7 @@ return {
                 localization = {
                     j_vampire = { name = "Vampire Batgirl" },
                     j_raised_fist = { name = "Rebel Against Judgement" },
+                    b_small = { name = "Smol Blind" }
                 }
             }
         },
