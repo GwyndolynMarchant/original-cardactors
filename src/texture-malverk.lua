@@ -9,7 +9,7 @@ AltTexture({
   }
 })
 
--- TODO: Cannot get this working right now. Waiting on reply from Eremel about how this is supposed to work.
+-- TODO: Cannot get this working right now. Eremel says the code looks right...
 -- AltTexture({
 --   key = 'smol_blind',
 --   set = 'Blind',
