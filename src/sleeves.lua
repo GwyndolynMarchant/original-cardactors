@@ -1,6 +1,8 @@
 SMODS.Atlas {
 	key = "sleeves",
-
+	px = 73,
+	py = 95,
+	path = "OCs-sleeve.png"
 }
 
 CardSleeves.Sleeve {
