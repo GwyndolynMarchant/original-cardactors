@@ -1,5 +1,15 @@
 return {
     descriptions = {
+        Joker = {
+            j_ocs_billiesblunder = {
+                name = 'Billie\'s Blunder',
+                text = {
+                    '{C:green}#1# in #2#{} chance to upgrade {C:attention}High Card{}',
+                    'before played. Odds increase by {C:attention}#3#{} each hand,',
+                    'and reset at success or end of round.'
+                }
+            }
+        },
         alt_texture = {
             alt_tex_ocs_vampire_bat = {
                 name = 'Vampire: Vampire Batgirl',
@@ -10,8 +20,8 @@ return {
                 text = {'The raised fist now','belongs to Billie Hellgnoll!'},
             },
             alt_text_todo_hyena = {
-                name = 'To-do List: Hyena',
-                text = {'The to-do list spells out','HYENA now'},
+                name = 'Todo List: HYENA',
+                text = {'The to-do list','spells out HYENA now'},
             }
         },
         texture_packs = {
