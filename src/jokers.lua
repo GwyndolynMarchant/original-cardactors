@@ -29,9 +29,13 @@ SMODS.Joker {
     cost = 4,
     eternal_compat = true,
     perishable_compat = true,
+    blueprint_compat = true,
     calculate = function(self, card, context)      
       if context.before and context.scoring_name == "High Card" then 
         if pseudorandom("billiesblunder") < card.ability.extra.current_odds / card.ability.extra.odds then
+            if not context.blueprint then
+                card.ability.extra.current_odds = 0
+            end
             return {
                 card = card,
                 level_up = true,
