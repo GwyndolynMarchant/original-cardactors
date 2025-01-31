@@ -26,7 +26,8 @@
 					[
 						"../Steamodded",
 						"../Malverk",
-						"../CardSleeves"
+						"../CardSleeves",
+						"../.balatro"
 					],
 					"Lua.workspace.checkThirdParty": "Disable",
 				},
