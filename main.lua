@@ -9,6 +9,18 @@ SMODS.Atlas {
 mod_dir = ''..SMODS.current_mod.path
 ocConfig = SMODS.current_mod.config
 
+-- Global lists necessary for module interoperability
+globals = {
+  OC_jokers = {
+    'j_ocs_billiesblunder',
+  },
+  OC_textured = {
+    'j_vampire',
+    'j_raised_fist',
+    'j_todo_list'
+  }
+}
+
 -- Load Decks
 local decks, load_error = SMODS.load_file("src/decks.lua")
 if load_error or decks == nil then

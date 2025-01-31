@@ -37,5 +37,18 @@ return {
                 }
             }
         },
+        Sleeve = {
+            sleeve_ocs_sleeve_oc = {
+                name = "DO NOT STEAL",
+                text = { "Start with one","OC joker." }
+            },
+            sleeve_ocs_sleeve_oc_alt = {
+                name = "DO NOT STEAL",
+                text = {
+                    "Start with one OC joker",
+                    "and one negative retextured joker"
+                }
+            }
+        }
     }
 }

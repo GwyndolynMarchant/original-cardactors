@@ -1,5 +1,3 @@
-local global = require('global')
-
 SMODS.Atlas {
 	key = "decks",
 	px = 71,
@@ -22,7 +20,7 @@ SMODS.Back {
 					SMODS.add_card({
 						set = "Joker",
 						area = G.jokers,
-						key = pseudorandom_element(global.OC_jokers),
+						key = pseudorandom_element(globals.OC_jokers),
 						no_edition = true
 					})
 					return true
