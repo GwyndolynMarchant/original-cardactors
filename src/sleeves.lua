@@ -25,7 +25,7 @@ CardSleeves.Sleeve {
 							set = "Joker",
 							area = G.jokers,
 							key = pseudorandom_element(globals.OC_textured),
-							edition = "e_negative"
+							no_edition = true
 						})
 					end
 					return true

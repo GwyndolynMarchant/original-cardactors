@@ -50,8 +50,8 @@ return {
             sleeve_ocs_sleeve_oc_alt = {
                 name = "DO NOT STEAL",
                 text = {
-                    "Start with one OC joker",
-                    "and one negative retextured joker"
+                    "Start with an additional OC joker",
+                    "plus one retextured joker"
                 }
             }
         }
