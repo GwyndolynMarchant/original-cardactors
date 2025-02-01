@@ -55,5 +55,13 @@ return {
                 }
             }
         }
+    },
+    misc = {
+        achievement_names = {
+            ach_ocs_hyena = "HYENA",
+        },
+        achievement_descriptions = {
+            ach_ocs_hyena = "Get all HYENA jokers (Hint: Malverk!)"
+        },
     }
 }

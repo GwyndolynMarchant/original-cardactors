@@ -37,6 +37,14 @@ else
   ocJokers()
 end
 
+-- Load Achievements
+local achievements, load_error = SMODS.load_file("src/achievements.lua")
+if load_error or achievements == nil then
+  sendDebugMessage("The error is: "..load_error)
+else
+  achievements()
+end
+
 -- REQUIRES: Malverk. Load replacement textures.
 if (SMODS.Mods["malverk"] or {}).can_load then
   local malverk, load_error = SMODS.load_file("src/texture-malverk.lua")
