@@ -13,7 +13,19 @@ SMODS.Back {
 	},
 	atlas = "decks",
 	pos = { x = 0, y = 0 },
-	calculate = function (self, back, context)
-		-- TODO: Actual code
-	end
+	apply = function(self)
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				if G.jokers then
+					SMODS.add_card({
+						set = "Joker",
+						area = G.jokers,
+						key = pseudorandom_element(globals.OC_jokers),
+						no_edition = true
+					})
+					return true
+				end
+			end,
+		}))
+    end
 }

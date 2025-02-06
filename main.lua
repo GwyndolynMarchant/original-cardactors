@@ -9,6 +9,18 @@ SMODS.Atlas {
 mod_dir = ''..SMODS.current_mod.path
 ocConfig = SMODS.current_mod.config
 
+-- Global lists necessary for module interoperability
+globals = {
+  OC_jokers = {
+    'j_ocs_billiesblunder',
+  },
+  OC_textured = {
+    'j_vampire',
+    'j_raised_fist',
+    'j_todo_list'
+  }
+}
+
 -- Load Decks
 local decks, load_error = SMODS.load_file("src/decks.lua")
 if load_error or decks == nil then
@@ -23,6 +35,14 @@ if load_error or ocJokers == nil then
   sendDebugMessage("The error is: "..load_error)
 else
   ocJokers()
+end
+
+-- Load Achievements
+local achievements, load_error = SMODS.load_file("src/achievements.lua")
+if load_error or achievements == nil then
+  sendDebugMessage("The error is: "..load_error)
+else
+  achievements()
 end
 
 -- REQUIRES: Malverk. Load replacement textures.

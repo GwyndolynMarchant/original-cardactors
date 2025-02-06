@@ -18,15 +18,6 @@ SMODS.Joker {
             current_odds = 0,
         }
     },
-    -- This text needs to be replaced with localization stuff
-    loc_txt = {
-      name = 'Billie\'s blunder',
-      text = {
-        [1] = '{C:green}#1# in #2#{} chance to upgrade played {C:attention}High Card{}',
-        [2] = 'Odds increase by {C:attention}#3#{} each hand, and',
-        [3] = 'reset at success or end of round.'
-      }
-    },
 
     -- Note that in the tet #1# is the first variable here, #2# is the second, etc
     loc_vars = function(self, info_queue, card)
