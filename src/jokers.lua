@@ -74,7 +74,7 @@ SMODS.Joker{
     loc_txt = {
       name = 'June, Balatro Genius',
       text = {
-        [1] = "Gives {X:mult,C:white} X#1# {} Mult." 
+        [1] = "Gives {X:mult,C:white} X#1# {} Mult.",
         [2] = "Increased by {X:mult,C:white} X#2# {} for the",
         [3] = 'highest stake June has defeated.'
       }
@@ -112,7 +112,7 @@ SMODS.Joker{
     loc_txt = {
       name = 'Rezzy Tail',
       text = {
-        [1] = "Regenerates into a random Rezzy" 
+        [1] = "Regenerates into a random Rezzy",
         [2] = "with random values at end of round"
       }
     },
@@ -120,7 +120,7 @@ SMODS.Joker{
         return false
     end,
     calculate = function(self, card, context)
-        if context.end_of_round = true and game_over = false then
+        if context.end_of_round == true and game_over == false then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound('tarot1')
@@ -168,7 +168,7 @@ SMODS.Joker{
     loc_txt = {
       name = 'Chippy Rezzy',
       text = {
-        [1] = "{C:chips}+#1#{} chips." 
+        [1] = "{C:chips}+#1#{} chips.",
         [2] = "Generates a Tail when ",
         [3] = 'destroyed or sold'
       }
@@ -182,11 +182,11 @@ SMODS.Joker{
                 end
             }))
         end
-    end
+    end,
     in_pool = function(self)
         if next(find_card("showman")) then
             return true
-        else if next(find_card("rezzychips")) or next(find_card("rezzymult")) or next(find_card("rezzycash")) or next(find_card("rezzyx")) or next(find_card("rezzylegend")) then
+        elseif next(find_card("rezzychips")) or next(find_card("rezzymult")) or next(find_card("rezzycash")) or next(find_card("rezzyx")) or next(find_card("rezzylegend")) then
             return false
         end
         return true
