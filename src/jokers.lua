@@ -148,11 +148,12 @@ SMODS.Joker{
                             card = nil
                             G.E_MANAGER:add_event(Event({
                                 func = function()
-                                    local new_card = create_card('Joker', G.jokers, nil, nil, nil, nil, 'rezzychips', nil)
-                                    new_card.ability.extra.rezzymainval = pseudorandom(pseudoseed("rezzytail"),new_card.ability.extra.rezzyminval,new_card.ability.extra.rezzymaxval)
-                                    card:add_to_deck()
-                                    card:start_materialize()
-                                    G.jokers:emplace(card)
+                                    -- We can just use SMODS.add_card to handle emplacement etc for us.
+                                    SMODS.add_card({
+                                        set = "Joker",
+                                        area = G.jokers,
+                                        key = 'j_ocs_rezzychips'
+                                    })
                                     return true
                                 end
                             }))
@@ -187,16 +188,20 @@ SMODS.Joker{
         if not from_debuff then
             G.E_MANAGER:add_event(Event({
                 func = function() 
-                    local new_card = add_card('Joker', G.jokers, nil, nil, nil, nil, 'rezzytail', nil)
+                    SMODS.add_card({
+                        set = "Joker",
+                        area = G.jokers,
+                        key = 'j_ocs_rezzytail'
+                    })
                     return true 
                 end
             }))
         end
     end,
     in_pool = function(self)
-        if next(find_card("showman")) then
+        if next(SMODS.find_card("showman")) then
             return true
-        elseif next(find_card("rezzychips")) or next(find_card("rezzymult")) or next(find_card("rezzycash")) or next(find_card("rezzyx")) or next(find_card("rezzylegend")) then
+        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
             return false
         end
         return true
