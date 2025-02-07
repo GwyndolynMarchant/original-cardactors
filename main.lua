@@ -13,6 +13,9 @@ ocConfig = SMODS.current_mod.config
 globals = {
   OC_jokers = {
     'j_ocs_billiesblunder',
+    'j_ocs_geniusjunebug',
+    'j_ocs_rezzytail',
+    'j_ocs_rezzychips',
   },
   OC_textured = {
     'j_vampire',
