@@ -1,13 +1,9 @@
 SMODS.Atlas {
-    -- Key for code to find it with
-    key = "ocjokers",
-    -- The name of the file, for the code to pull the atlas from
+    key = "ocjokers", -- Standalone OC jokers
     path = "oc-jokers.png",
-    -- Width of each sprite in 1x size
     px = 71,
-    -- Height of each sprite in 1x size
     py = 95
-  }
+}
 
 SMODS.Joker {
     
@@ -61,6 +57,12 @@ SMODS.Joker {
 
 }
 
+SMODS.Atlas {
+    key = 'junebug', -- June, Balatro Genius alternates
+    path = "junebug.png",
+    px = 71,
+    py = 95
+}
 
 SMODS.Joker{
 
@@ -85,8 +87,8 @@ SMODS.Joker{
     end,
 
     rarity = 2,
-    atlas = 'ocjokers',
-    pos = { x = 0, y = 0 },
+    atlas = 'junebug',
+    pos = { x = 0, y = 0 }, -- TODO: Dynamically change X based on stake beaten
     cost = 5,
     eternal_compat = true,
     perishable_compat = true,
@@ -102,12 +104,20 @@ SMODS.Joker{
     end
 }
 
+SMODS.Atlas {
+    key = 'rezzies', -- June, Balatro Genius alternates
+    path = "rezzies.png",
+    px = 71,
+    py = 95
+}
+
+
 SMODS.Joker{
     key = "rezzytail",
     rarity = 1,
-    atlas = 'ocjokers',
+    atlas = 'rezzies',
     blueprint_compat = false,
-    pos = {x = 0, y = 0},
+    pos = {x = 1, y = 1},
     cost = 0,
     loc_txt = {
       name = 'Rezzy Tail',
@@ -160,7 +170,7 @@ SMODS.Joker{
 SMODS.Joker{
     key = "rezzychips",
     rarity = 1,
-    atlas = 'ocjokers',
+    atlas = 'rezzies',
     blueprint_compat = true,
     config = {extra = {rezzymainval = 1,rezzyminval = 1, rezzymaxval = 100}},
     pos = {x = 0, y = 0},
