@@ -25,6 +25,10 @@ globals = {
     'j_vampire',
     'j_raised_fist',
     'j_todo_list'
+  },
+  OC_colors = {
+    pink = '#d500b8',
+    black = '#000000'
   }
 }
 
