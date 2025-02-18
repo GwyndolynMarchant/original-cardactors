@@ -7,22 +7,21 @@ SMODS.Atlas {
 
 SMODS.Booster({
 	key = "actors",
-	text = {
-        "Choose {C:attention}#1#{} of {C:attention}#4#{} jokers",
-        "from the Original Cardactors Mod",
+	loc_txt = {
+        "Choose {C:attention}#1#{} of {C:attention}#2#{} OCs"
     },
 	atlas = "oc_booster",
 	pos = { x = 0, y = 0 },
-    weight = 1,
-    config = {extra = 4, choose = 1},
-    group_key = 'original_characters',
-    kind = "ocs_pack",
-    create_card = function(self, card)
+    -- weight = 1,
+    config = { extra = 4, choose = 1 },
+    -- group_key = 'original_characters',
+    -- kind = "ocs_pack",
+    create_card = function(self, card, i)
         local cardlist = get_usable_oc_cards()
         return {set = "Joker", area = G.jokers, key = pseudorandom_element(cardlist, pseudoseed("ocspack"))}
     end,
     loc_vars = function(self, info_queue, card)
-		return { vars = {card.config.choose, card.config.extra} }
+		return { vars = { card.config.choose, card.config.extra } }
 	end,
 	ease_background_colour = function(self)
 		ease_colour(G.C.DYN_UI.MAIN, globals.OC_colors.pink)
