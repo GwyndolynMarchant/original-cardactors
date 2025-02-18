@@ -292,7 +292,7 @@ SMODS.Joker{
     pos = {x = 0, y = 1},
     cost = 3,
     loc_txt = {
-      name = 'Ritzy Rezzie',
+      name = 'Ritzy Rezzy',
       text = {
         [1] = "Earn {C:money}+#1#{} at",
         [2] = "end of round.",
