@@ -32,7 +32,6 @@ globals = {
   }
 }
 
-
 function get_usable_oc_cards()
   local _joker_list = {}
   for k, v in pairs(globals.OC_jokers) do
@@ -70,11 +69,12 @@ else
   achievements()
 end
 
-local otherstuff, load_error = SMODS.load_file("src/otherstuff.lua")
-if load_error or otherstuff == nil then
+-- Load Boosters
+local boosters, load_error = SMODS.load_file("src/boosters.lua")
+if load_error or boosters == nil then
   sendDebugMessage("The error is: "..load_error)
 else
-  otherstuff()
+  boosters()
 end
 
 

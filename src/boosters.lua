@@ -6,7 +6,7 @@ SMODS.Atlas {
 }
 
 SMODS.Booster({
-	key = "cardactors_booster",
+	key = "actors",
 	text = {
         "Choose {C:attention}#1#{} of {C:attention}#4#{} jokers",
         "from the Original Cardactors Mod",
@@ -24,4 +24,8 @@ SMODS.Booster({
     loc_vars = function(self, info_queue, card)
 		return { vars = {card.config.choose, card.config.extra} }
 	end,
+	ease_background_colour = function(self)
+		ease_colour(G.C.DYN_UI.MAIN, globals.OC_colors.pink)
+		ease_background_colour({ new_colour = globals.OC_colors.pink, special_colour = globals.OC_colors.black, contrast = 4 })
+	end
 })
