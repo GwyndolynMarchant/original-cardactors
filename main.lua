@@ -27,8 +27,8 @@ globals = {
     'j_todo_list'
   },
   OC_colors = {
-    pink = '#d500b8',
-    black = '#000000'
+    pink = HEX('D500B8'),
+    black = HEX('000000')
   }
 }
 
