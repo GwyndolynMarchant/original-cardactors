@@ -8,7 +8,12 @@ SMODS.Atlas {
 SMODS.Booster({
 	key = "actors",
 	loc_txt = {
-        "Choose {C:attention}#1#{} of {C:attention}#2#{} OCs"
+        name = "Characters Pack",
+        group_name = "Characters Pack",
+        text = {
+            "Choose {C:attention}#1#{} of {C:attention}#2#{}",
+            "Original Cardactors",
+        }
     },
 	atlas = "oc_booster",
 	pos = { x = 0, y = 0 },
@@ -18,11 +23,11 @@ SMODS.Booster({
     -- kind = "ocs_pack",
     create_card = function(self, card, i)
         local cardlist = get_usable_oc_cards()
-        return {set = "Joker", area = G.jokers, key = pseudorandom_element(cardlist, pseudoseed("ocspack"))}
+        return {set = "Joker", area = G.jokers, key = pseudorandom_element(cardlist, pseudoseed("ocspack")),  skip_materialize = true}
     end,
     loc_vars = function(self, info_queue, card)
-		return { vars = { card.config.choose, card.config.extra } }
-	end,
+        return { vars = { card.config.center.config.choose, card.ability.extra } }
+    end,
 	ease_background_colour = function(self)
 		ease_colour(G.C.DYN_UI.MAIN, globals.OC_colors.pink)
 		ease_background_colour({ new_colour = globals.OC_colors.pink, special_colour = globals.OC_colors.black, contrast = 4 })
