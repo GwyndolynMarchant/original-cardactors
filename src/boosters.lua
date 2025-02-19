@@ -26,8 +26,8 @@ SMODS.Booster({
         return {set = "Joker", area = G.jokers, key = pseudorandom_element(cardlist, pseudoseed("ocspack")),  skip_materialize = true}
     end,
     loc_vars = function(self, info_queue, card)
-		return { vars = {card.config.choose, card.config.extra} }
-	end,
+        return { vars = { card.config.center.config.choose, card.ability.extra } }
+    end,
 	ease_background_colour = function(self)
 		ease_colour(G.C.DYN_UI.MAIN, globals.OC_colors.pink)
 		ease_background_colour({ new_colour = globals.OC_colors.pink, special_colour = globals.OC_colors.black, contrast = 4 })
