@@ -16,6 +16,10 @@ globals = {
     'j_ocs_geniusjunebug',
     'j_ocs_rezzytail',
     'j_ocs_rezzychips',
+    'j_ocs_rezzymult',
+    'j_ocs_rezzycash',
+    'j_ocs_rezzyx',
+    'j_ocs_rezzylegend',
   },
   OC_textured = {
     'j_vampire',
@@ -23,6 +27,20 @@ globals = {
     'j_todo_list'
   }
 }
+
+
+function get_usable_oc_cards()
+  local _joker_list = {}
+  for k, v in pairs(globals.OC_jokers) do
+    if v ~= 'j_ocs_rezzyx' and v ~= 'j_ocs_rezzylegend' then
+      table.insert(_joker_list, v)
+    end
+  end
+  for k, v in pairs(globals.OC_textured) do
+    table.insert(_joker_list, v)
+  end
+  return _joker_list
+end
 
 -- Load Decks
 local decks, load_error = SMODS.load_file("src/decks.lua")
@@ -48,6 +66,14 @@ else
   achievements()
 end
 
+local otherstuff, load_error = SMODS.load_file("src/otherstuff.lua")
+if load_error or otherstuff == nil then
+  sendDebugMessage("The error is: "..load_error)
+else
+  otherstuff()
+end
+
+
 -- REQUIRES: Malverk. Load replacement textures.
 if (SMODS.Mods["malverk"] or {}).can_load then
   local malverk, load_error = SMODS.load_file("src/texture-malverk.lua")
@@ -57,6 +83,7 @@ if (SMODS.Mods["malverk"] or {}).can_load then
     malverk()
   end
 end
+
 
 -- REQUIRES: CardSleeves. Load Sleeves
 if (SMODS.Mods["CardSleeves"] or {}).can_load then
