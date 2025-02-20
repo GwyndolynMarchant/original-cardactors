@@ -11,8 +11,7 @@ SMODS.Booster({
         name = "Characters Pack",
         group_name = "Characters Pack",
         text = {
-            "Choose {C:attention}#1#{} of {C:attention}#2#{}",
-            "Original Cardactors",
+            "Choose {C:attention}#1#{} of {C:attention}#2#{} OCs",
         }
     },
 	atlas = "oc_booster",
