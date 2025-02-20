@@ -86,6 +86,10 @@ p {
   height: 190px;
   image-rendering: pixelated;
 }
+.joker.BossBlind img {
+  height: 136px;
+}
+
 img.hasback {
   background-image: url("img/sticker_bg.png");
   background-size: 142px 190px;

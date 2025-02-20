@@ -81,6 +81,14 @@ let jokers = [
     face_url: "img/rezzy-legend-front.png",
     rarity: "Legendary"
   },
+  {
+    name: "More to come...",
+    text: [
+      "<a href='commissions.html'>Maybe you?</a>"
+    ],
+    image_url: "img/YCH.png",
+    rarity: "Uncommon"
+  },
   // {
   //   name: "",
   //   text: [
@@ -304,6 +312,7 @@ let add_cards_to_div = (jokers, jokers_div) => {
         <h4 class="rarity" style="background-color: ${rarities[joker.rarity]}">${joker.rarity}</h4>
         <div class="text">${joker.text}</div>
       `;
+      joker_div.classList.add(joker.rarity.replaceAll(' ',''));
     }
   
     jokers_div.appendChild(joker_div);
