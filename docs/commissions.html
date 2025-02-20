@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Original Cardactors</title>
+  <script src="https://xemantic.github.io/shader-web-background/dist/shader-web-background.min.js"></script>
+  <script type="x-shader/x-fragment" id="image">
+    precision mediump float;
+    #define SPIN_EASE 0.8
+    #define spin_time 5.
+    #define spin_amount 0.3
+    #define contrast 3.
+
+    // #define PIXEL_SIZE_FAC 700.
+
+    // default colours
+    #define colour_1 vec4(0.58,0,0.42,1.0)
+    #define colour_2 vec4(0.0,0.0,0.0,1.0)
+    #define colour_3 vec4(0.2156862745,0.2588235294,0.2666666667,1.0)
+
+    uniform vec2 iResolution;
+    uniform float iTime;
+
+    void main( )
+    {
+      // uncomment to enable pixelated bg
+      // float pixel_size = length(iResolution.xy)/PIXEL_SIZE_FAC;
+      float pixel_size = 1.0;
+      vec2 uv = (floor(gl_FragCoord.xy*(1./pixel_size))*pixel_size - 0.5*iResolution.xy)/length(iResolution.xy) - vec2(0.12, 0.);
+      
+      float uv_len = length(uv);
+      
+      float speed = (spin_time*SPIN_EASE*0.2) + 302.2;
+      float new_pixel_angle = (atan(uv.y, uv.x)) + speed - SPIN_EASE*20.*(1.*spin_amount*uv_len + (1. - 1.*spin_amount));
+      
+      vec2 mid = vec2(0.5, 0.5);
+      uv = (vec2((uv_len * cos(new_pixel_angle) + mid.x), (uv_len * sin(new_pixel_angle) + mid.y)) - mid);
+      
+      uv *= 30.;
+      speed = iTime*(2.);
+      vec2 uv2 = vec2(uv.x+uv.y);
+
+      for(int i=0; i < 5; i++) {
+        uv2 += sin(max(uv.x, uv.y)) + uv;
+        uv  += 0.5*vec2(cos(5.1123314 + 0.353*uv2.y + speed*0.131121),sin(uv2.x - 0.113*speed));
+        uv  -= 1.0*cos(uv.x + uv.y) - 1.0*sin(uv.x*0.711 - uv.y);
+      }
+      
+      float contrast_mod = (0.25*contrast + 0.5*spin_amount + 1.2);
+      float paint_res =min(2., max(0.,length(uv)*(0.035)*contrast_mod));
+      float c1p = max(0.,1. - contrast_mod*abs(1.-paint_res));
+      float c2p = max(0.,1. - contrast_mod*abs(paint_res));
+      float c3p = 1. - min(1., c1p + c2p);
+
+      // Output to screen
+      gl_FragColor = (0.3/contrast)*colour_1 + (1. - 0.3/contrast)*(colour_1*c1p + colour_2*c2p + vec4(c3p*colour_3.rgb, c3p*colour_1.a));
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script>
+    let t = 0;
+    requestAnimationFrame(function update() {
+      t += 1/120;
+      requestAnimationFrame(update);
+    });
+    shaderWebBackground.shade({
+      shaders: {
+        image: {
+          uniforms: {
+            iResolution: (gl, loc, ctx) => gl.uniform2f(loc, ctx.width, ctx.height),
+            iTime: (gl, loc, ctx) => gl.uniform1f(loc, t)
+          }
+        }
+      }
+    });
+  </script>
+  <div class="bg"></div>
+  <style type="text/css">
+    .joker {
+      width: 25%;
+    }
+    #faq-paid > b:first-of-type { color: pink; }
+    #faq-private > b:first-of-type { color: skyblue; }
+    #faq-compat > b:first-of-type { color: LemonChiffon; }
+    #faq-broke > b:first-of-type { color: PaleGreen; }
+    #faq-items > b:first-of-type { color: Thistle; }
+    #faq-individual > b:first-of-type { color: Moccasin; }
+  </style>
+  <main>
+    <h1>Commissions</h1>
+    <p>
+      Want a Balatro mod featuring your OCs, fursonas, or self? You've come to the right people! <a href="https://shadenexus.com/">hellgnoll</a> and <a href="https://butterflytheory.site/">junipertheory</a> are the team behind <a href="index.html">Original Cardactors</a>, the grab-bag mod of little friends for everyone! Our commissions are <b>OPEN</b>, and we are ready to make you into a joker! (Or whatever else!)
+    </p>
+    <p>
+      When you commission us, we will provide you a stand-alone mod that contains just your commissioned item! It will also be added to the Original Cardactors mod unless requested (see <a href="#faq">FAQ</a>), so everyone can download and enjoy the ever expanding collection of characters!
+    </p>
+    <p>
+      If you're interested in commissioning us, reach out to either of us on DMs or email!
+    </p>
+    <h2>Contact</h2>
+    <br>
+    <div class="cards">
+      <div class="list">
+        <h3>hellgnoll</h3>
+        <br>
+        <a class="download" href="mailto:commissions@shadenexus.com">email</a>
+        <a class="download" href="https://slime.global/@lunalapin">mastodon</a>
+      </div>
+      <div class="list">
+        <h3>junipertheory</h3>
+        <br>
+        <a class="download" href="mailto:junipertheory2@gmail.com">email</a>
+        <a class="download" href="https://discordapp.com/users/147509694070652928">discord</a>
+        <a class="download" href="https://bsky.app/profile/junipertheory.bsky.social">bluesky</a>
+      </div>
+    </div>
+    <br>
+    <h2>Pricing</h2>
+    <br>
+    <div class="cards">
+      <div class="joker">
+        <h3>Texture Replacement</h3>
+        <img src="img/billie-fist.png" alt="Modified art of the joker 'Raised Fist'" />
+        <h4 class="rarity price">US$30</h4>
+        <div class="text">
+          Replace the art of an existing item (Joker, Blind, Voucher, etc.) with an original piece of art featuring your character!
+        </div>
+      </div>
+      <div class="joker">
+        <h3>Simple Addition</h3>
+        <img src="img/YCH.png" alt="Card art featuring a blue character with YCH written over their eyes" />
+        <h4 class="rarity price">US$60</h4>
+        <div class="text">
+          A brand new item with original art! Common to rare jokers, consumables like tarot cards, vouchers, decks, and other simple items! We’ll take your character and design an ability around their features and personality, program it, draw it, and wrap it up in the mod! If you’ve got a concept already in mind, let us know!
+        </div>
+      </div>
+      <div class="joker">
+        <h3>Complex Addition</h3>
+        <span class="soulholder">
+          <img src="img/rezzy-legend-back.png" alt="A legendary joker with a psychedelic background." class="soul-bg" />
+          <img src="img/rezzy-legend-front.png" class="soul-top" />
+        </span>
+        <h4 class="rarity price">US$90</h4>
+        <div class="text">
+          A brand new item with original art and a BIG impact! Complex spectrals, legendary jokers, jokers with advanced combos, jokers with multiple phases… maybe you want your joker to be larger and weirdly shaped! Whatever you’re looking for we’ll make it work!
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="cards">
+      <div class="joker">
+        <h3>A Whole Bespoke Mod</h3>
+        <h4 class="rarity price">US$200+</h4>
+        <div class="text">
+          A bunch of additions, unique effects, unique rarities, whatever your heart can imagine… DM us for details and we’ll figure it out with you!
+        </div>
+      </div>
+    </div>
+    <br>
+    <section id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <br>
+      <p id="faq-paid">
+        <b>Is this a paid mod?</b> <b><u>NO.</u></b> Anyone can download this mod and enjoy it! Patrons pay us for our labour adding their requests to the mod as outlined in our pricing above, like ye olde furry commissions. While we can make you a private mod for personal use if requested (see below), we <b>do not</b> (and will not ever) condone paid mods.
+      </p>
+      <p id="faq-private">
+        <b>What if I don’t want to be part of the big mod and just want to commission my own thing?</b> If you wish to forego your characters being added, we are happy to make a private mod for your personal use. Please contact us with any additional questions. Standard pricing and conditions will apply.
+      </p>
+      <p id="faq-compat">
+        <b>Is this mod compatible with other mods (say, <i>Pokermon</i> or <i>Cryptid</i>)?</b> Hopefully! We all use a ton of random mods and try to keep things compatible. If you’d like compatibility with a specific mod, let us know and we’ll try to make it work. Keep in mind that long-term compatibility is not something we can guarantee.
+      </p>
+      <p id="faq-individual">
+        <b>The stand-alone mod of my character stopped working after SMOD updated... can you fix it?</b> Unfortunately, we can't continuously re-release the individual mods to all patrons whenever something breaks. <b>However</b>, we will keep the Original Cardactors collection up-to-date and working (at least as long as our commissions are open) and your characters will be kept functional and updated there. ❤
+      <p id="faq-broke">
+        <b>I’m broke, but I still think this mod is super cool!</b> That’s not a question, but feel free to suggest things or such! This mod is also a place for us to add random ideas and random stuff our friends suggest. If you have an idea, we’ll maybe try it out!
+      </p>
+      <p id="faq-items">
+        <b>I have multiple Jokers I want to commission. How are commissions itemized? What if it’s four versions of the same character?</b> We’ll help you figure it out and make something work! Reach out and ask us for a quote and we can let you know what sort of discount we can offer.
+      </p>
+    </section>
+</body>
+</html>

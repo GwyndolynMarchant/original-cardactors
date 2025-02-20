@@ -1,129 +1,188 @@
 let jokers = [
+  {
+    name: "Billie's Blunder",
+    text: [
+      '{C:green}0 in 4{} chance to upgrade {C:attention}High Card{}',
+      'before played. Odds increase by {C:attention}1{} each hand,',
+      'and reset at success or end of round.'
+    ],
+    image_url: "img/billie-blunder.png",
+    rarity: "Uncommon"
+  },
+  {
+    name: "June, Balatro Genius",
+    text: [
+      "Gives {X:mult,C:white}X1{} Mult.",
+      "Increased by {X:mult,C:white}X0.25{} for the",
+      'highest stake June has defeated.'
+    ],
+    image_url: "img/junebug.png",
+    rarity: "Uncommon"
+  },
+  {
+    name: "Rezzy Tail",
+    text: [
+        "Regenerates into a random Rezzy",
+        "with random values at end of round"
+    ],
+    image_url: "img/rezzy-tail.png",
+    rarity: "Common"
+  },
+  {
+    name: "Chippy Rezzy",
+    text: [
+        "{C:chips}+1?{} chips.",
+        "Generates a Tail when ",
+        "destroyed or sold"
+    ],
+    image_url: "img/rezzy-chippy.png",
+    rarity: "Common"
+  },
+  {
+    name: "Rhythm Rezzy",
+    text: [
+        "{C:mult}+1?{} mult.",
+        "Generates a Tail when ",
+        "destroyed or sold"
+    ],
+    image_url: "img/rezzy-rhythm.png",
+    rarity: "Common"
+  },
+  {
+    name: "Ritzy Rezzy",
+    text: [
+        "Earn {C:money}+1?{} at",
+        "end of round.",
+        "Generates a Tail when ",
+        'destroyed or sold'
+    ],
+    image_url: "img/rezzy-ritzy.png",
+    rarity: "Uncommon"
+  },
+  {
+    name: "X Rated Rezzy",
+    text: [
+        "{X:mult,C:white}X1?{} Mult",
+        "Generates a Tail when ",
+        'destroyed or sold'
+    ],
+    image_url: "img/rezzy-x.png",
+    rarity: "Rare"
+  },
+  {
+    name: "Rezzy of Legend",
+    soul: true,
+    text: [
+        "Retrigger all played cards {C:chips}+1?{} times.",
+        "Generates a Tail when ",
+        'destroyed or sold'
+    ],
+    back_url: "img/rezzy-legend-back.png",
+    face_url: "img/rezzy-legend-front.png",
+    rarity: "Legendary"
+  },
   // {
-  //   name: "Joker",
+  //   name: "",
   //   text: [
-  //     "{C:mult}+4{} Mult"
+  //     ""
   //   ],
-  //   image_url: "img/j_joker.png",
+  //   image_url: "img/",
   //   rarity: "Common"
-  // }
+  // },
 ]
 
-// works the same. 
+let textures = [
+  {
+    name: "Rebel Against Judgement",
+    text: [
+      "Reskin of {C:joker}Raised Fist{}",
+      "{C:ATTENTION}Requires Malverk{}"
+    ],
+    image_url: "img/billie-fist.png",
+    rarity: "Common"
+  },
+  {
+    name: "To-do List",
+    text: [
+      "Reskin of {C:joker}To-do List{}",
+      "{C:ATTENTION}Requires Malverk{}"
+    ],
+    image_url: "img/todo-hyena.png",
+    rarity: "Common"
+  },
+  {
+    name: "Vampire Batgirl",
+    text: [
+      "Reskin of {C:joker}Vampire{}",
+      "{C:ATTENTION}Requires Malverk{}"
+    ],
+    image_url: "img/vampire.png",
+    rarity: "Uncommon"
+  },
+  {
+    name: "Smol Blind",
+    text: [
+      "Reskin of {C:joker}Small Blind{}",
+      "{C:ATTENTION}Requires Malverk{}"
+    ],
+    image_url: "img/blind_smol.png",
+    rarity: "Boss Blind"
+  },
+  // {
+  //   name: "",
+  //   text: [
+  //     ""
+  //   ],
+  //   image_url: "img/",
+  //   rarity: "Common"
+  // },
+]
+
+
 let consumables = [
-  // {
-  //   name: "Joker",
-  //   text: [
-  //     "{C:mult}+4{} Mult"
-  //   ],
-  //   image_url: "img/j_joker.png",
-  //   rarity: "Tarot"
-  // },
-  // {
-  //   name: "Joker",
-  //   text: [
-  //     "{C:mult}+4{} Mult"
-  //   ],
-  //   image_url: "img/j_joker.png",
-  //   rarity: "Planet"
-  // },
-  // {
-  //   name: "Joker",
-  //   text: [
-  //     "{C:mult}+4{} Mult"
-  //   ],
-  //   image_url: "img/j_joker.png",
-  //   rarity: "Spectral"
-  // },
+
 ]
 
 let card_modifications = [
-  // {
-  //   name: "Joker",
-  //   text: [
-  //     "{C:mult}+4{} Mult"
-  //   ],
-  //   image_url: "img/j_joker.png",
-  //   rarity: "Enhancement"
-  // },
-  // {
-  //   name: "Joker",
-  //   text: [
-  //     "{C:mult}+4{} Mult"
-  //   ],
-  //   image_url: "img/j_joker.png",
-  //   rarity: "Edition"
-  // },
-  // {
-  //   name: "Joker",
-  //   text: [
-  //     "{C:mult}+4{} Mult"
-  //   ],
-  //   image_url: "img/sticker_example.png",
-  //   rarity: "Seal"
-  // },
+
 ]
 
 let decks = [
-  // {
-  //   name: "Joker",
-  //   text: [
-  //     "{C:mult}+4{} Mult"
-  //   ],
-  //   image_url: "img/j_joker.png",
-  //   rarity: "Deck"
-  // },
+
 ]
 
 let stickers = [
-  // {
-  //   name: "Joker",
-  //   text: [
-  //     "{C:mult}+4{} Mult"
-  //   ],
-  //   image_url: "img/sticker_example.png",
-  //   rarity: "Sticker"
-  // },
+
 ]
 
 let blinds = [
-  // {
-  //   name: "The Wall",
-  //   text: [
-  //     "Extra large blind",
-  //     "{C:inactive}({C:red}4x{C:inactive} Base for {C:attention}$$$$${C:inactive})",
-  //     "{C:inactive}(Appears from Ante 2)"
-  //   ],
-  //   image_url: "img/the_wall.png",
-  //   rarity: "Boss Blind"
-  // },
-  // {
-  //   name: "Violet Vessel",
-  //   text: [
-  //     "Very large blind",
-  //     "{C:inactive}({C:red}6x{C:inactive} Base for {C:attention}$$$$$$$${C:inactive})",
-  //     "{C:inactive}(Appears from Ante 8)"
-  //   ],
-  //   image_url: "img/violet_vessel.png",
-  //   rarity: "Showdown"
-  // },
+
 ]
 
 let shop_items = [
   {
-    name: "Joker",
+    name: "Original Cardactors",
     text: [
-      "{C:mult}+4{} Mult"
+      "Begin with","an OC joker."
     ],
-    image_url: "img/j_joker.png",
-    rarity: "Voucher"
+    image_url: "img/OCs-deck.png",
+    rarity: "Deck"
   },
   {
-    name: "Joker",
+    name: "Original Cardactors",
     text: [
-      "{C:mult}+4{} Mult"
+      "Begin with an OC joker.",
+      "{C:ATTENTION}Requires CardSleeves{}"
     ],
-    image_url: "img/j_joker.png",
+    image_url: "img/OCs-sleeve.png",
+    rarity: "Sleeve"
+  },
+  {
+    name: "Characters Pack",
+    text: [
+      "Choose {C:attention}1{} of {C:attention}4{} OCs",
+    ],
+    image_url: "img/OCs-booster.png",
     rarity: "Pack"
   },
 ]
@@ -186,6 +245,7 @@ let rarities = {
   "Edition": "#4ca893",
   "Seal": "#4584fa",
   "Deck": "#9bb6bd",
+  "Sleeve": "#0047AA",
   "Sticker": "#5d5dff",
   "Boss Blind": "#5d5dff",
   "Showdown": "#4584fa",
@@ -224,15 +284,15 @@ let add_cards_to_div = (jokers, jokers_div) => {
       joker_div.innerHTML = `
         <h3>${joker.name}</h3>
         <img src="${joker.image_url}" alt="${joker.name}" class="hasback" />
-        <h4 class="rarity" style="background-color: ${rarities[joker.rarity]}">${joker.rarity}</h4>
+        <h4 class="rarity ${joker.rarity}" style="background-color: ${rarities[joker.rarity]}">${joker.rarity}</h4>
         <div class="text">${joker.text}</div>
       `;
     } else if (joker.soul) {
       joker_div.innerHTML = `
         <h3>${joker.name}</h3>
         <span class="soulholder">
-          <img src="${joker.image_url}" alt="${joker.name}" class="soul-bg" />
-          <img src="${joker.image_url}" alt="${joker.name}" class="soul-top" />
+          <img src="${joker.back_url}" alt="${joker.name}" class="soul-bg" />
+          <img src="${joker.face_url}" alt="${joker.name}" class="soul-top" />
         </span>
         <h4 class="rarity" style="background-color: ${rarities[joker.rarity]}">${joker.rarity}</h4>
         <div class="text">${joker.text}</div>
@@ -297,4 +357,11 @@ if (shop_items.length === 0) {
 } else {
   let shopitems_div = document.querySelector(".shopitems");
   add_cards_to_div(shop_items, shopitems_div);
+}
+
+if (textures.length === 0) {
+  document.querySelector(".texturedfull").style.display = "none"
+} else {
+  let textures_div = document.querySelector(".textured");
+  add_cards_to_div(textures, textures_div);
 }

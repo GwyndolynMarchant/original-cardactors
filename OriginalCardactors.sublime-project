@@ -5,6 +5,10 @@
             "path": ".",
             "name": "Original Cardactors",
         },
+        {
+        	"path": "docs",
+        	"name": "Website"
+        }
 	],
     "build_systems":
     [
