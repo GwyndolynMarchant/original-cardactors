@@ -32,3 +32,15 @@ SMODS.Booster({
 		ease_background_colour({ new_colour = globals.OC_colors.pink, special_colour = globals.OC_colors.black, contrast = 4 })
 	end
 })
+
+SMODS.Sound({
+  key = "music_OCs",
+  path = "music-OCs.ogg",
+  select_music_track = function()
+    return (
+      G.pack_cards and G.pack_cards.cards and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config.center.key == "p_ocs_actors"
+    )
+  end,
+  volume = 1.3,
+  pitch = 1.3
+})
