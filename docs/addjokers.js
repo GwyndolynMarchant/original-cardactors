@@ -189,6 +189,7 @@ let shop_items = [
     name: "Characters Pack",
     text: [
       "Choose {C:attention}1{} of {C:attention}4{} OCs",
+      "{C:PALE_GREEN}Music by <a href='https://slime.global/@rezzish'>Rezzy!</a>{}"
     ],
     image_url: "img/OCs-booster.png",
     rarity: "Pack"
