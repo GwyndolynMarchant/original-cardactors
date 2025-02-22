@@ -16,7 +16,7 @@ CardSleeves.Sleeve {
 					SMODS.add_card({
 						set = "Joker",
 						area = G.jokers,
-						key = pseudorandom_element(globals.OC_jokers),
+						key = pseudorandom_element(globals.OC_jokers, pseudoseed("ocjokers")),
 						no_edition = true
 					})
 					sendDebugMessage(CardSleeves.Sleeve.get_current_deck_key())
@@ -24,7 +24,7 @@ CardSleeves.Sleeve {
 						SMODS.add_card({
 							set = "Joker",
 							area = G.jokers,
-							key = pseudorandom_element(globals.OC_textured),
+							key = pseudorandom_element(globals.OC_textured, pseudoseed("ocjokers")),
 							no_edition = true
 						})
 					end

@@ -20,7 +20,7 @@ SMODS.Back {
 					SMODS.add_card({
 						set = "Joker",
 						area = G.jokers,
-						key = pseudorandom_element(globals.OC_jokers),
+						key = pseudorandom_element(globals.OC_jokers, pseudoseed("ocsdeck")),
 						no_edition = true
 					})
 					return true
