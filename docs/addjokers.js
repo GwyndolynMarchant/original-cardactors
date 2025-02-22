@@ -180,7 +180,7 @@ let shop_items = [
     name: "Original Cardactors",
     text: [
       "Begin with an OC joker.",
-      "{C:ATTENTION}Requires CardSleeves{}"
+      "{C:ATTENTION}Requires <a href='https://github.com/larswijn/CardSleeves'>CardSleeves</a>{}"
     ],
     image_url: "img/OCs-sleeve.png",
     rarity: "Sleeve"
