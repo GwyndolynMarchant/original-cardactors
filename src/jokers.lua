@@ -130,7 +130,7 @@ SMODS.Joker{
         return false
     end,
     calculate = function(self, card, context)
-        if context.end_of_round and not context.repetition and not context.individual then
+        if context.end_of_round and not context.repetition and not context.individual and not context.blueprint then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound('tarot1')
@@ -290,7 +290,7 @@ SMODS.Joker{
     blueprint_compat = true,
     config = {extra = {rezzymainval = 2,rezzyminval = 2, rezzymaxval = 10}},
     pos = {x = 0, y = 1},
-    cost = 3,
+    cost = 4,
     loc_txt = {
       name = 'Ritzy Rezzy',
       text = {
@@ -338,7 +338,7 @@ SMODS.Joker{
     blueprint_compat = true,
     config = {extra = {rezzymainval = 11,rezzyminval = 11, rezzymaxval = 35}},
     pos = {x = 1, y = 0},
-    cost = 3,
+    cost = 6,
     loc_txt = {
       name = 'X Rated Rezzy',
       text = {
@@ -388,7 +388,7 @@ SMODS.Joker{
     blueprint_compat = true,
     config = {extra = {rezzymainval = 1,rezzyminval = 1, rezzymaxval = 3}},
     pos = {x = 3, y = 0},
-    cost = 3,
+    cost = 10,
     soul_pos = {x = 3, y = 1 },
     loc_txt = {
       name = 'Rezzy of Legend',
