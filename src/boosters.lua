@@ -9,16 +9,15 @@ SMODS.Booster({
 	key = "actors",
 	loc_txt = {
         name = "Characters Pack",
-        group_name = "Characters Pack",
+        group_name = "OCs",
         text = {
             "Choose {C:attention}#1#{} of {C:attention}#2#{} OCs",
         }
     },
 	atlas = "oc_booster",
 	pos = { x = 0, y = 0 },
-  weight = .75,
+  weight = .80,
   config = { extra = 4, choose = 1 },
-  group_key = 'original_characters',
   kind = "ocs_pack",
   create_card = function(self, card, i)
       local cardlist = get_usable_oc_cards()
