@@ -8,6 +8,62 @@ return {
                     'Odds increase by {C:attention}#3#{} each hand,',
                     'and reset at success or end of round.'
                 }
+            },
+            j_ocs_geniusjunebug = {
+                name = 'June, Balatro Genius',
+                text = {
+                    "Gives {X:mult,C:white} X#1# {} Mult.",
+                    "Increased by {X:mult,C:white} X#2# {} for the",
+                    "highest stake June has defeated."
+                }
+            },
+            j_ocs_rezzytail = {
+                name = 'Rezzy Tail',
+                text = {
+                    "Regenerates into a random Rezzy",
+                    "with random values at end of round"
+                }
+            },
+            j_ocs_rezzychips = {
+                name = 'Chippy Rezzy',
+                text = {
+                    "{C:chips}+#1#{} chips.",
+                    "Generates a Tail when",
+                    "destroyed or sold"
+                }
+            },
+            j_ocs_rezzymult = {
+                name = 'Rhythm Rezzy',
+                text = {
+                    "{C:mult}+#1#{} mult.",
+                    "Generates a Tail when",
+                    "destroyed or sold"
+                }
+            },
+            j_ocs_rezzycash = {
+                name = 'Ritzy Rezzy',
+                text = {
+                    "Earn {C:money}+#1#{} at",
+                    "end of round.",
+                    "Generates a Tail when",
+                    "destroyed or sold"
+                }
+            },
+            j_ocs_rezzyx = {
+                name = 'X Rated Rezzy',
+                text = {
+                    "{X:mult,C:white} X#1# {} Mult",
+                    "Generates a Tail when",
+                    "destroyed or sold"
+                }
+            },
+            j_ocs_rezzylegend = {
+                name = 'Rezzy of Legend',
+                text = {
+                    "Retrigger all played cards {C:chips}+#1#{} times.",
+                    "Generates a Tail when",
+                    "destroyed or sold"
+                }
             }
         },
         alt_texture = {
