@@ -26,6 +26,10 @@ return {
             alt_tex_ocs_smol_blind = {
                 name = 'Small Blind: Smol Blind',
                 text = {'The blind is smol… uwu'}
+            },
+            alt_tex_ocs_showgirl = {
+                name = 'Showman: Showgirl Moof',
+                text = {'The showman is now','a delightful showgirl','wolf-cow!'}
             }
         },
         texture_packs = {
@@ -38,7 +42,8 @@ return {
                 localization = {
                     j_vampire = { name = "Vampire Batgirl" },
                     j_raised_fist = { name = "Rebel Against Judgement" },
-                    b_small = { name = "Smol Blind" }
+                    b_small = { name = "Smol Blind" },
+                    j_ring_master = { name = "Showgirl Moof" }
                 }
             }
         },
