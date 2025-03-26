@@ -2,8 +2,8 @@ let jokers = [
   {
     name: "Billie's Blunder",
     text: [
-      '{C:green}0 in 4{} chance to upgrade {C:attention}High Card{}',
-      'before played. Odds increase by {C:attention}1{} each hand,',
+      '{C:green}0 in 4{} chance to upgrade played {C:attention}High Card{}.',
+      'Odds increase by {C:attention}1{} each hand,',
       'and reset at success or end of round.'
     ],
     image_url: "img/billie-blunder.png",
@@ -180,7 +180,7 @@ let shop_items = [
     name: "Original Cardactors",
     text: [
       "Begin with an OC joker.",
-      "{C:ATTENTION}Requires CardSleeves{}"
+      "{C:ATTENTION}Requires <a href='https://github.com/larswijn/CardSleeves'>CardSleeves</a>{}"
     ],
     image_url: "img/OCs-sleeve.png",
     rarity: "Sleeve"

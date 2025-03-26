@@ -5,8 +5,8 @@ SMODS.Atlas {
     py = 95
 }
 
+-- Billie's Blunder
 SMODS.Joker {
-    
     key = 'billiesblunder',
     config = {
         extra = {
@@ -64,28 +64,17 @@ SMODS.Atlas {
     py = 95
 }
 
+-- June, Balatro Genius
 SMODS.Joker{
-
     key = 'geniusjunebug',
     config = {
         extra = {
             xmult_mod = .25,
         }
     },
-
-    loc_txt = {
-      name = 'June, Balatro Genius',
-      text = {
-        [1] = "Gives {X:mult,C:white} X#1# {} Mult.",
-        [2] = "Increased by {X:mult,C:white} X#2# {} for the",
-        [3] = 'highest stake June has defeated.'
-      }
-    },
-
     loc_vars = function(self, info_queue, card)
       return { vars = { (get_joker_win_sticker(self,true) + 1) * (card.ability.extra.xmult_mod) + 1, card.ability.extra.xmult_mod} }
     end,
-
     rarity = 2,
     atlas = 'junebug',
     pos = { x = 0, y = 0 }, -- TODO: Dynamically change X based on stake beaten
@@ -111,7 +100,7 @@ SMODS.Atlas {
     py = 95
 }
 
-
+-- Rezzy Tail
 SMODS.Joker{
     key = "rezzytail",
     rarity = 1,
@@ -119,13 +108,6 @@ SMODS.Joker{
     blueprint_compat = false,
     pos = {x = 1, y = 1},
     cost = 0,
-    loc_txt = {
-      name = 'Rezzy Tail',
-      text = {
-        [1] = "Regenerates into a random Rezzy",
-        [2] = "with random values at end of round"
-      }
-    },
     in_pool = function(self)
         return false
     end,
@@ -182,7 +164,7 @@ SMODS.Joker{
     end
 }
 
-
+-- Chippy Rezzy
 SMODS.Joker{
     key = "rezzychips",
     rarity = 1,
@@ -191,14 +173,6 @@ SMODS.Joker{
     config = {extra = {rezzymainval = 10,rezzyminval = 10, rezzymaxval = 100}},
     pos = {x = 0, y = 0},
     cost = 3,
-    loc_txt = {
-      name = 'Chippy Rezzy',
-      text = {
-        [1] = "{C:chips}+#1#{} chips.",
-        [2] = "Generates a Tail when ",
-        [3] = 'destroyed or sold'
-      }
-    },
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
             G.E_MANAGER:add_event(Event({
@@ -233,6 +207,7 @@ SMODS.Joker{
     end
 }
 
+-- Rhythm Rezzy
 SMODS.Joker{
     key = "rezzymult",
     rarity = 1,
@@ -241,14 +216,6 @@ SMODS.Joker{
     config = {extra = {rezzymainval = 4,rezzyminval = 4, rezzymaxval = 20}},
     pos = {x = 2, y = 0},
     cost = 3,
-    loc_txt = {
-      name = 'Rhythm Rezzy',
-      text = {
-        [1] = "{C:mult}+#1#{} mult.",
-        [2] = "Generates a Tail when ",
-        [3] = 'destroyed or sold'
-      }
-    },
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
             G.E_MANAGER:add_event(Event({
@@ -283,6 +250,7 @@ SMODS.Joker{
     end
 }
 
+-- Ritzy Rezzy
 SMODS.Joker{
     key = "rezzycash",
     rarity = 2,
@@ -291,15 +259,6 @@ SMODS.Joker{
     config = {extra = {rezzymainval = 2,rezzyminval = 2, rezzymaxval = 10}},
     pos = {x = 0, y = 1},
     cost = 4,
-    loc_txt = {
-      name = 'Ritzy Rezzy',
-      text = {
-        [1] = "Earn {C:money}+#1#{} at",
-        [2] = "end of round.",
-        [3] = "Generates a Tail when ",
-        [4] = 'destroyed or sold'
-      }
-    },
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
             G.E_MANAGER:add_event(Event({
@@ -331,6 +290,7 @@ SMODS.Joker{
     end
 }
 
+-- X Rated Rezzy
 SMODS.Joker{
     key = "rezzyx",
     rarity = 3,
@@ -339,14 +299,6 @@ SMODS.Joker{
     config = {extra = {rezzymainval = 11,rezzyminval = 11, rezzymaxval = 35}},
     pos = {x = 1, y = 0},
     cost = 6,
-    loc_txt = {
-      name = 'X Rated Rezzy',
-      text = {
-        [1] = "{X:mult,C:white} X#1# {} Mult",
-        [2] = "Generates a Tail when ",
-        [3] = 'destroyed or sold'
-      }
-    },
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
             G.E_MANAGER:add_event(Event({
@@ -381,6 +333,7 @@ SMODS.Joker{
     end
 }
 
+-- Rezzy of Legend
 SMODS.Joker{
     key = "rezzylegend",
     rarity = 4,
@@ -390,14 +343,6 @@ SMODS.Joker{
     pos = {x = 3, y = 0},
     cost = 10,
     soul_pos = {x = 3, y = 1 },
-    loc_txt = {
-      name = 'Rezzy of Legend',
-      text = {
-        [1] = "Retrigger all played cards {C:chips}+#1#{} times.",
-        [2] = "Generates a Tail when ",
-        [3] = 'destroyed or sold'
-      }
-    },
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
             G.E_MANAGER:add_event(Event({
