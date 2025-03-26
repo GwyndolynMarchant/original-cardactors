@@ -54,6 +54,14 @@ return {
                     "plus one retextured joker"
                 }
             }
+        },
+        Voucher = {
+            v_ocs_btech = {
+                name = "Balinalogical Technical Institute",
+                text = {
+                    "WORK IN PROGRESS"
+                }
+            }
         }
     },
     misc = {
