@@ -435,3 +435,12 @@ SMODS.Joker{
     end
     end
 --]]
+
+SMODS.Joker{
+    key = "robomoof",
+    rarity = 1,
+    atlas = 'ocjokers',
+    blueprint_compat = false,
+    pos = {x = 2, y = 0},
+    cost = 3
+}

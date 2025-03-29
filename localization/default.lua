@@ -64,6 +64,12 @@ return {
                     "Generates a Tail when",
                     "destroyed or sold"
                 }
+            },
+            j_ocs_robomoof = {
+                name = "Damascene",
+                text = {
+                    "WORK IN PROGRESS"
+                }
             }
         },
         alt_texture = {
