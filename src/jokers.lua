@@ -389,13 +389,30 @@ SMODS.Joker{
     cost = 9,
     loc_vars = function(self, info_queue, card)
         if card.ability.extra.capcard == nil then
-            return { vars = { "None yet... " } }
+            return {
+                vars = {
+                    "None yet... ",
+                    colours = {
+                        G.C.UI.TEXT_INACTIVE
+                    }
+                }
+            }
         else
             -- Not fully displaying properly
-            local a = card.ability.extra.capcard.edition and card.ability.extra.capcard.edition.type .. " " or ""
-            local b = card.ability.extra.capcard.ability.name and card.ability.extra.capcard.ability.name .. " " or ""
-            local z = card.ability.extra.capcard.seal and " with " .. card.ability.extra.capcard.seal .. " seal" or ""
-            return { vars = { a .. b .. card.ability.extra.capcard.base.value .. ' of ' .. card.ability.extra.capcard.base.suit .. z } }
+            local cap = card.ability.extra.capcard
+            local edition     = cap.edition and cap.edition.type or "Default"
+            local enhancement = cap.ability and cap.ability.name or "Default Base"
+            local a = edition     ~= "Default"      and G.localization.descriptions.Edition["e_" .. edition].name        .. " " or ""
+            local b = enhancement ~= "Default Base" and G.localization.descriptions.Enhanced[cap.config.center.key].name .. " " or ""
+            local z = cap.seal and " with " .. G.localization.descriptions.Other[string.lower(cap.seal) .. "_seal"].name or ""
+            return {
+                vars = {
+                    a .. b .. G.localization.misc.ranks[cap.base.value] .. ' of ' .. G.localization.misc.suits_plural[cap.base.suit] .. z,
+                    colours = {
+                        G.C.SUITS[cap.base.suit]
+                    }
+                },
+            }
         end
     end,
 
