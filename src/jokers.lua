@@ -94,7 +94,7 @@ SMODS.Joker{
 }
 
 SMODS.Atlas {
-    key = 'rezzies', -- June, Balatro Genius alternates
+    key = 'rezzies', -- All the rezzies alternates
     path = "rezzies.png",
     px = 71,
     py = 95
@@ -379,62 +379,80 @@ SMODS.Joker{
     end
 }
 
---[[
 SMODS.Joker{
     key = "sybilthroat",
     rarity = 3,
     atlas = 'ocjokers',
     blueprint_compat = false,
-    config = {extra = {capsuit = "",caprank = "", capenhance = "", capseal = "", capedition = "", capsticker = ""}},
-    pos = {x = 3, y = 0},
+    config = { extra = { capcard = nil } },
+    pos = {x = 1, y = 0},
     cost = 9,
-    loc_txt = {
-      name = 'Scandalous Sybil Throat',
-      text = {
-        [1] = "Captures any lone scored high card",
-        [2] = "Slowly transforms all other scored cards",
-        [3] = 'Into the captured card',
-        [4] = '{T:v_telescope}Captured: #1#',
-      }
-    },
     loc_vars = function(self, info_queue, card)
-        local cardstring = ""
-        if card.ability.extra.capsuit == "" and card.ability.extra.caprank == "" then
-            cardstring = "None yet..."
+        if card.ability.extra.capcard == nil then
+            return { vars = { "None yet... " } }
         else
-            cardstring = cardstring .. card.ability.extra.caprank .. ' of ' .. card.ability.extra.capsuit
-        return { vars = {card.ability.extra.rezzymainval} }
-      end,
-
-    calculate = function(self, card, context)      
-    if context.after and context.scoring_name == "High Card" then 
-        if pseudorandom(pseudoseed("billiesblunder")) < card.ability.extra.current_odds / card.ability.extra.odds then
-            if not context.blueprint then
-                card.ability.extra.current_odds = 0
-            end
-            return {
-                card = card,
-                level_up = true,
-                message = "I can't stop winning!"
-            }
-        elseif not context.blueprint then
-            card.ability.extra.current_odds = card.ability.extra.current_odds + G.GAME.probabilities.normal
-            return {
-                message = "Just one more...",
-                colour = G.C.GREEN,
-                card = card
-            }
+            -- Not fully displaying properly
+            local a = card.ability.extra.capcard.edition and card.ability.extra.capcard.edition.type .. " " or ""
+            local b = card.ability.extra.capcard.ability.name and card.ability.extra.capcard.ability.name .. " " or ""
+            local z = card.ability.extra.capcard.seal and " with " .. card.ability.extra.capcard.seal .. " seal" or ""
+            return { vars = { a .. b .. card.ability.extra.capcard.base.value .. ' of ' .. card.ability.extra.capcard.base.suit .. z } }
         end
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play then
+            if #G.play.cards == 1 then
+
+                -- Copy the card
+                card.ability.extra.capcard = {
+                    edition = context.other_card.edition, -- Edition
+                    base = {
+                        suit = context.other_card.base.suit, -- Suit
+                        value = context.other_card.base.value -- Rank
+                    },
+                    seal = context.other_card.seal, -- Seal
+
+                    -- Enhancements
+                    ability = copy_table(context.other_card.ability),
+                    config = {
+                        center = context.other_card.config.center
+                    }
+                }
+
+                context.other_card:explode({G.C.GREEN})
+
+                return {
+                    message = "Captured!"
+                }
+            elseif card.ability.extra.capcard then
+                context.other_card:set_edition(card.ability.extra.capcard.edition)
+                context.other_card:set_seal(card.ability.extra.capcard.seal)
+
+                -- Enhancements 
+                context.other_card:set_ability(card.ability.extra.capcard.config.center)
+                context.other_card.ability.type = card.ability.extra.capcard.ability.type
+
+                -- Rank and Suit
+                SMODS.change_base(context.other_card, card.ability.extra.capcard.base.suit, card.ability.extra.capcard.base.value)
+
+                -- The rest of enhancements
+                for k, v in pairs(card.ability.extra.capcard.ability) do
+                    if type(v) == 'table' then 
+                        context.other_card.ability[k] = copy_table(v)
+                    else
+                        context.other_card.ability[k] = v
+                    end
+                end
+
+                context.other_card:juice_up()
+
+                return {
+                    message = "TF!"
+                }
+            end
+        end 
     end
-    if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
-        card.ability.extra.current_odds = 0
-        return {
-            card = card,
-            message = "Reset"
-        }
-    end
-    end
---]]
+}
 
 SMODS.Joker{
     key = "robomoof",

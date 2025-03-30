@@ -70,6 +70,15 @@ return {
                 text = {
                     "WORK IN PROGRESS"
                 }
+            },
+            j_ocs_sybilthroat = {
+                  name = 'Scandalous Sybil Throat',
+                  text = {
+                    'Captures any lone scored high card',
+                    'Slowly transforms all other scored cards',
+                    'Into the captured card',
+                    '{s:0.8}{C:grey}#1#{}',
+                  }
             }
         },
         alt_texture = {
