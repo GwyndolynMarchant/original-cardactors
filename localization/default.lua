@@ -20,7 +20,7 @@ return {
             j_ocs_rezzytail = {
                 name = 'Rezzy Tail',
                 text = {
-                    "Regenerates into a random Rezzy",
+                    "Regenerates into a random {C:attention}Rezzy{c:attention}",
                     "with random values at end of round"
                 }
             },
@@ -28,7 +28,7 @@ return {
                 name = 'Chippy Rezzy',
                 text = {
                     "{C:chips}+#1#{} chips.",
-                    "Generates a Tail when",
+                    "Generates a {C:attention}Tail{} when",
                     "destroyed or sold"
                 }
             },
@@ -36,7 +36,7 @@ return {
                 name = 'Rhythm Rezzy',
                 text = {
                     "{C:mult}+#1#{} mult.",
-                    "Generates a Tail when",
+                    "Generates a {C:attention}Tail{} when",
                     "destroyed or sold"
                 }
             },
@@ -45,7 +45,7 @@ return {
                 text = {
                     "Earn {C:money}+#1#{} at",
                     "end of round.",
-                    "Generates a Tail when",
+                    "Generates a {C:attention}Tail{} when",
                     "destroyed or sold"
                 }
             },
@@ -53,15 +53,15 @@ return {
                 name = 'X Rated Rezzy',
                 text = {
                     "{X:mult,C:white} X#1# {} Mult",
-                    "Generates a Tail when",
+                    "Generates a {C:attention}Tail{} when",
                     "destroyed or sold"
                 }
             },
             j_ocs_rezzylegend = {
                 name = 'Rezzy of Legend',
                 text = {
-                    "Retrigger all played cards {C:chips}+#1#{} times.",
-                    "Generates a Tail when",
+                    "Retrigger all played cards {C:attention}+#1#{} times.",
+                    "Generates a {C:attention}Tail{} when",
                     "destroyed or sold"
                 }
             },
@@ -74,9 +74,9 @@ return {
             j_ocs_sybilthroat = {
                   name = 'Scandalous Sybil Throat',
                   text = {
-                    'Captures any lone scored high card',
+                    '{C:attention}Capture{} any lone scored {C:attention}High Card{}',
                     'Slowly transforms all other scored cards',
-                    'Into the captured card',
+                    'into the captured card',
                     '{V:1}(#1#){}',
                   }
             }
