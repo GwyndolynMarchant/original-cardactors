@@ -82,6 +82,24 @@ let jokers = [
     rarity: "Legendary"
   },
   {
+    name: "Scandalous Sybil Throat",
+    text: [
+      '{C:attention}Capture{} any lone scored {C:attention}High Card{}',
+      'Slowly transforms all other scored cards',
+      'into the captured card',
+    ],
+    image_url: "img/sybil.png",
+    rarity: "Rare"
+  },
+  {
+    name: "Damascene",
+    text: [
+      'WORK IN PROGRESS'
+    ],
+    image_url: "img/robomoof.png",
+    rarity: "Common"
+  },
+  {
     name: "More to come...",
     text: [
       "<a href='commissions.html'>Maybe you?</a>"
@@ -136,6 +154,15 @@ let textures = [
     image_url: "img/blind_smol.png",
     rarity: "Boss Blind"
   },
+  {
+    name: "Showgirl Moof",
+    text: [
+      "Reskin of {C:joker}Showman{}",
+      "{C:ATTENTION}Requires Malverk{}"
+    ],
+    image_url: "img/showgirl.png",
+    rarity: "Common"
+  },
   // {
   //   name: "",
   //   text: [
@@ -146,28 +173,26 @@ let textures = [
   // },
 ]
 
-
-let consumables = [
-
+let vouchers = [
+  {
+    name: "Balinalogical Technical Institute",
+    text: [
+      "WORK IN PROGRESS"
+    ],
+    image_url: "img/btech.png",
+    rarity: "Voucher"
+  },
+  {
+    name: "Internal Access",
+    text: [
+      "WORK IN PROGRESS"
+    ],
+    image_url: "img/bverse.png",
+    rarity: "Voucher"
+  },
 ]
 
-let card_modifications = [
-
-]
-
-let decks = [
-
-]
-
-let stickers = [
-
-]
-
-let blinds = [
-
-]
-
-let shop_items = [
+let core_items = [
   {
     name: "Original Cardactors",
     text: [
@@ -320,58 +345,19 @@ let add_cards_to_div = (jokers, jokers_div) => {
   }
 }
 
-if (jokers.length === 0) {
-  document.querySelector(".jokersfull").style.display = "none"
-} else {
-  let jokers_div = document.querySelector(".jokers");
-  add_cards_to_div(jokers, jokers_div);
+function fillSection(items, name) {
+  let section = document.querySelector(`.${name}full`);
+  if (items.length === 0) {
+    section.style.display = "none"
+  } else {
+    let items_div = document.createElement("div");
+    items_div.classList.add("cards");
+    section.appendChild(items_div);
+    add_cards_to_div(items, items_div);
+  }
 }
 
-if (consumables.length === 0) {
-  document.querySelector(".consumablesfull").style.display = "none"
-} else {
-  let consumables_div = document.querySelector(".consumables");
-  add_cards_to_div(consumables, consumables_div);
-}
-
-if (card_modifications.length === 0) {
-  document.querySelector(".cardmodsfull").style.display = "none"
-} else {
-  let cardmods_div = document.querySelector(".cardmods");
-  add_cards_to_div(card_modifications, cardmods_div);
-}
-
-if (decks.length === 0) {
-  document.querySelector(".decksfull").style.display = "none"
-} else {
-  let decks_div = document.querySelector(".decks");
-  add_cards_to_div(decks, decks_div);
-}
-
-if (stickers.length === 0) {
-  document.querySelector(".stickersfull").style.display = "none"
-} else {
-  let stickers_div = document.querySelector(".stickers");
-  add_cards_to_div(stickers, stickers_div);
-}
-
-if (blinds.length === 0) {
-  document.querySelector(".blindsfull").style.display = "none"
-} else {
-  let blinds_div = document.querySelector(".blinds");
-  add_cards_to_div(blinds, blinds_div);
-}
-
-if (shop_items.length === 0) {
-  document.querySelector(".shopitemsfull").style.display = "none"
-} else {
-  let shopitems_div = document.querySelector(".shopitems");
-  add_cards_to_div(shop_items, shopitems_div);
-}
-
-if (textures.length === 0) {
-  document.querySelector(".texturedfull").style.display = "none"
-} else {
-  let textures_div = document.querySelector(".textured");
-  add_cards_to_div(textures, textures_div);
-}
+fillSection(jokers, "jokers");
+fillSection(textures, "textures");
+fillSection(vouchers, "vouchers");
+fillSection(core_items, "coreitems");
