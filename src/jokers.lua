@@ -157,15 +157,10 @@ SMODS.Joker{
                         center = context.other_card.config.center
                     }
                 }
-
-                -- TODO: Cannot get card deletion to stick...
-                context.other_card:explode({G.C.GREEN})
-
                 return {
                     message = "Captured!",
                     colour = G.C.GREEN,
                     delay = 0.45,
-                    remove = true
                 }
             elseif card.ability.extra.capcard then
                 -- Emphasize the changes
@@ -202,7 +197,15 @@ SMODS.Joker{
                     message = "TF!"
                 }
             end
-        end 
+        end
+        if context.destroy_card and context.cardarea == G.play then
+            -- Destroy the captured card
+            if #G.play.cards == 1 then
+                G.play.cards[1]:explode({G.C.GREEN})
+
+                return { remove = true }
+            end
+        end
     end
 }
 
