@@ -20,11 +20,14 @@ globals = {
     'j_ocs_rezzycash',
     'j_ocs_rezzyx',
     'j_ocs_rezzylegend',
+    'j_ocs_sybilthroat',
+    'j_ocs_robomoof'
   },
   OC_textured = {
     'j_vampire',
     'j_raised_fist',
-    'j_todo_list'
+    'j_todo_list',
+    'j_ring_master'
   },
   OC_colors = {
     pink = HEX('D500B8'),
@@ -60,7 +63,6 @@ loadModule("src/jokers.lua") -- Load Jokers
 loadModule("src/achievements.lua") -- Load Achievements
 loadModule("src/boosters.lua") -- Load Boosters
 loadModule("src/vouchers.lua") -- Load Vouchers
-
 
 -- REQUIRES: Malverk. Load replacement textures.
 if (SMODS.Mods["malverk"] or {}).can_load then
