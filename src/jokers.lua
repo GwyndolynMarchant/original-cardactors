@@ -100,7 +100,11 @@ SMODS.Joker{
     rarity = 3,
     atlas = 'ocjokers',
     blueprint_compat = false,
-    config = { extra = { capcard = nil } },
+    config = {
+        extra = {
+            capcard = nil,
+        }
+    },
     pos = {x = 1, y = 0},
     cost = 9,
     loc_vars = function(self, info_queue, card)
@@ -154,35 +158,45 @@ SMODS.Joker{
                     }
                 }
 
-                -- Destroy the captured card
+                -- TODO: Cannot get card deletion to stick...
                 context.other_card:explode({G.C.GREEN})
 
                 return {
-                    message = "Captured!"
+                    message = "Captured!",
+                    colour = G.C.GREEN,
+                    delay = 0.45,
+                    remove = true
                 }
             elseif card.ability.extra.capcard then
-                -- Edition
-                context.other_card:set_edition(card.ability.extra.capcard.edition)
-
-                -- Seal
-                context.other_card:set_seal(card.ability.extra.capcard.seal)
-
-                -- Rank and Suit
-                SMODS.change_base(context.other_card, card.ability.extra.capcard.base.suit, card.ability.extra.capcard.base.value)
-
-                -- Enhancements 
-                context.other_card:set_ability(card.ability.extra.capcard.config.center)
-                context.other_card.ability.type = card.ability.extra.capcard.ability.type
-                for k, v in pairs(card.ability.extra.capcard.ability) do
-                    if type(v) == 'table' then 
-                        context.other_card.ability[k] = copy_table(v)
-                    else
-                        context.other_card.ability[k] = v
-                    end
-                end
-
                 -- Emphasize the changes
                 context.other_card:juice_up()
+
+                local delta = {}
+                if (not context.other_card.edition or context.other_card.edition.type ~= card.ability.extra.capcard.edition.type) then delta["EDITION"] = true end
+                if (context.other_card.seal ~= card.ability.extra.capcard.seal) then delta["SEAL"] = true end
+                if (context.other_card.base.value ~= card.ability.extra.capcard.base.value) then delta["RANK"] = true end
+                if (context.other_card.base.suit ~= card.ability.extra.capcard.base.suit) then delta["SUIT"] = true end
+                if (context.other_card.ability.name ~= card.ability.extra.capcard.ability.name) then delta["ABILITY"] = true end
+
+                local _, e = pseudorandom_element(delta, pseudoseed("sybilthroat"))
+                sendDebugMessage("Element chose: " .. e)
+
+                if e == "EDITION" then context.other_card:set_edition(card.ability.extra.capcard.edition)
+                elseif e == "SEAL" then context.other_card:set_seal(card.ability.extra.capcard.seal)
+                elseif e == "RANK" then SMODS.change_base(context.other_card, context.other_card.base.suit, card.ability.extra.capcard.base.value)
+                elseif e == "SUIT" then SMODS.change_base(context.other_card, card.ability.extra.capcard.base.suit, context.other_card.base.value)
+                elseif e == "ABILITY" then
+                    -- Enhancements 
+                    context.other_card:set_ability(card.ability.extra.capcard.config.center)
+                    context.other_card.ability.type = card.ability.extra.capcard.ability.type
+                    for k, v in pairs(card.ability.extra.capcard.ability) do
+                        if type(v) == 'table' then 
+                            context.other_card.ability[k] = copy_table(v)
+                        else
+                            context.other_card.ability[k] = v
+                        end
+                    end
+                end
 
                 return {
                     message = "TF!"
