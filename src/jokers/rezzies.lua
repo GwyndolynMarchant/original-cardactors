@@ -98,9 +98,9 @@ SMODS.Joker{
         end
     end,
     in_pool = function(self)
-        if next(SMODS.find_card("showman")) then
+        if next(SMODS.find_card("j_ring_master")) then
             return true
-        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
+        elseif next(SMODS.find_card("j_ocs_rezzychips")) or next(SMODS.find_card("j_ocs_rezzymult")) or next(SMODS.find_card("j_ocs_rezzycash")) or next(SMODS.find_card("j_ocs_rezzyx")) or next(SMODS.find_card("j_ocs_rezzylegend")) then
             return false
         end
         return true
@@ -139,9 +139,9 @@ SMODS.Joker{
         end
     end,
     in_pool = function(self)
-        if next(SMODS.find_card("showman")) then
+        if next(SMODS.find_card("j_ring_master")) then
             return true
-        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
+        elseif next(SMODS.find_card("j_ocs_rezzychips")) or next(SMODS.find_card("j_ocs_rezzymult")) or next(SMODS.find_card("j_ocs_rezzycash")) or next(SMODS.find_card("j_ocs_rezzyx")) or next(SMODS.find_card("j_ocs_rezzylegend")) then
             return false
         end
         return true
@@ -180,9 +180,9 @@ SMODS.Joker{
         end
     end,
     in_pool = function(self)
-        if next(SMODS.find_card("showman")) then
+        if next(SMODS.find_card("j_ring_master")) then
             return true
-        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
+        elseif next(SMODS.find_card("j_ocs_rezzychips")) or next(SMODS.find_card("j_ocs_rezzymult")) or next(SMODS.find_card("j_ocs_rezzycash")) or next(SMODS.find_card("j_ocs_rezzyx")) or next(SMODS.find_card("j_ocs_rezzylegend")) then
             return false
         end
         return true
@@ -218,9 +218,9 @@ SMODS.Joker{
         end
     end,
     in_pool = function(self)
-        if next(SMODS.find_card("showman")) then
+        if next(SMODS.find_card("j_ring_master")) then
             return true
-        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
+        elseif next(SMODS.find_card("j_ocs_rezzychips")) or next(SMODS.find_card("j_ocs_rezzymult")) or next(SMODS.find_card("j_ocs_rezzycash")) or next(SMODS.find_card("j_ocs_rezzyx")) or next(SMODS.find_card("j_ocs_rezzylegend")) then
             return false
         end
         return true
@@ -260,9 +260,9 @@ SMODS.Joker{
         end
     end,
     in_pool = function(self)
-        if next(SMODS.find_card("showman")) then
+        if next(SMODS.find_card("j_ring_master")) then
             return true
-        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
+        elseif next(SMODS.find_card("j_ocs_rezzychips")) or next(SMODS.find_card("j_ocs_rezzymult")) or next(SMODS.find_card("j_ocs_rezzycash")) or next(SMODS.find_card("j_ocs_rezzyx")) or next(SMODS.find_card("j_ocs_rezzylegend")) then
             return false
         end
         return true
