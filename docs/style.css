@@ -180,3 +180,7 @@ a.download:hover {
 footer {
   font-size: 0.9em;
 }
+
+section > div {
+  padding: 1em 0;
+}
