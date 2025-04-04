@@ -68,7 +68,10 @@ return {
             j_ocs_robomoof = {
                 name = "Damascene",
                 text = {
-                    "WORK IN PROGRESS"
+                    "Gives {X:mult,C:white} X#1# {} Mult.",
+                    "Increases by {X:mult,C:white} X#2# {} per",
+                    "additional {C:attention}Damascene{}.",
+                    "(Starts at {X:mult,C:white} X#3# {} Mult.)"
                 }
             },
             j_ocs_sybilthroat = {
