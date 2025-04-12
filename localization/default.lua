@@ -138,15 +138,15 @@ return {
             v_ocs_btech = {
                 name = "Balinological Technical Institute",
                 text = {
-                  "Gain an eternal {C:joker}Showman{}",
-                  "and {C:ATTENTION}+1 Joker slots{}"
+                  "Gain an eternal {C:attention}#1#{}",
+                  "and {C:attention}+1 Joker slots{}"
                 }
             },
             v_ocs_bverse = {
                 name = "BTI Internal Access",
                 text = {
-                    "{C:joker}Duplicate{} jokers spawn",
-                    "with {C:ATTENTION}editions{}."
+                    "{C:attention}Duplicate{} jokers spawn",
+                    "with {C:attention}editions{}."
                 }
             }
         }

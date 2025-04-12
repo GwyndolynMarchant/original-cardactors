@@ -12,6 +12,14 @@ SMODS.Voucher {
 	config = { extra = {joker_slots = 1}},
 	unlocked = true,
 	discovered = false,
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = G.P_CENTERS.j_ring_master
+		return {
+			vars = {
+				G.localization.descriptions.Joker.j_ring_master.name
+			}
+		}
+    end,
 	redeem = function(self)
 		G.E_MANAGER:add_event(Event({ 
             func = function()
