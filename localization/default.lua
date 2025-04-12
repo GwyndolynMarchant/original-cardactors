@@ -136,9 +136,17 @@ return {
         },
         Voucher = {
             v_ocs_btech = {
-                name = "Balinalogical Technical Institute",
+                name = "Balinological Technical Institute",
                 text = {
-                    "WORK IN PROGRESS"
+                  "Gain an eternal {C:joker}Showman{}",
+                  "and {C:ATTENTION}+1 Joker slots{}"
+                }
+            },
+            v_ocs_bverse = {
+                name = "BTI Internal Access",
+                text = {
+                    "{C:joker}Duplicate{} jokers spawn",
+                    "with {C:ATTENTION}editions{}."
                 }
             }
         }

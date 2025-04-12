@@ -175,17 +175,19 @@ let textures = [
 
 let vouchers = [
   {
-    name: "Balinalogical Technical Institute",
+    name: "Balinological Technical Institute",
     text: [
-      "WORK IN PROGRESS"
+      "Gain an eternal {C:joker}Showman{}",
+      "and {C:ATTENTION}+1 Joker slots{}"
     ],
     image_url: "img/btech.png",
     rarity: "Voucher"
   },
   {
-    name: "Internal Access",
+    name: "BTI Internal Access",
     text: [
-      "WORK IN PROGRESS"
+      "{C:joker}Duplicate{} jokers spawn",
+      "with {C:ATTENTION}editions{}."
     ],
     image_url: "img/bverse.png",
     rarity: "Voucher"
