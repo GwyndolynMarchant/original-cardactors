@@ -27,13 +27,21 @@ AltTexture({
   keys = { 'j_todo_list' },
 })
 
+AltTexture({
+  key = 'showgirl',
+  set = 'Joker',
+  path = 'showgirl.png',
+  keys = { 'j_ring_master' },
+})
+
 TexturePack({
   key = 'OCs',
   textures = {
     'ocs_vampire_bat',
     'ocs_smol_blind',
     'ocs_billie_fist',
-    'ocs_todo_hyena'
+    'ocs_todo_hyena',
+    'ocs_showgirl'
   },
   localization = true
 })

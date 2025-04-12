@@ -20,17 +20,30 @@ globals = {
     'j_ocs_rezzycash',
     'j_ocs_rezzyx',
     'j_ocs_rezzylegend',
+    'j_ocs_sybilthroat',
+    'j_ocs_robomoof'
   },
   OC_textured = {
     'j_vampire',
     'j_raised_fist',
-    'j_todo_list'
+    'j_todo_list',
+    'j_ring_master'
   },
   OC_colors = {
     pink = HEX('D500B8'),
     black = HEX('000000')
   }
 }
+
+function loadModule(module)
+  -- Load Decks
+  local modFunction, load_error = SMODS.load_file(module)
+  if load_error or modFunction == nil then
+    sendDebugMessage("The error is: "..load_error)
+  else
+    modFunction()
+  end
+end
 
 function get_usable_oc_cards()
   local _joker_list = {}
@@ -45,56 +58,18 @@ function get_usable_oc_cards()
   return _joker_list
 end
 
--- Load Decks
-local decks, load_error = SMODS.load_file("src/decks.lua")
-if load_error or decks == nil then
-  sendDebugMessage("The error is: "..load_error)
-else
-  decks()
-end
-
--- Load Jokers
-local ocJokers, load_error = SMODS.load_file("src/jokers.lua")
-if load_error or ocJokers == nil then
-  sendDebugMessage("The error is: "..load_error)
-else
-  ocJokers()
-end
-
--- Load Achievements
-local achievements, load_error = SMODS.load_file("src/achievements.lua")
-if load_error or achievements == nil then
-  sendDebugMessage("The error is: "..load_error)
-else
-  achievements()
-end
-
--- Load Boosters
-local boosters, load_error = SMODS.load_file("src/boosters.lua")
-if load_error or boosters == nil then
-  sendDebugMessage("The error is: "..load_error)
-else
-  boosters()
-end
-
+loadModule("src/decks.lua") -- Load Decks
+loadModule("src/jokers.lua") -- Load Jokers
+loadModule("src/achievements.lua") -- Load Achievements
+loadModule("src/boosters.lua") -- Load Boosters
+loadModule("src/vouchers.lua") -- Load Vouchers
 
 -- REQUIRES: Malverk. Load replacement textures.
 if (SMODS.Mods["malverk"] or {}).can_load then
-  local malverk, load_error = SMODS.load_file("src/texture-malverk.lua")
-  if load_error or malverk == nil then
-    sendDebugMessage("The error is: "..load_error)
-  else
-    malverk()
-  end
+  loadModule("src/texture-malverk.lua")
 end
-
 
 -- REQUIRES: CardSleeves. Load Sleeves
 if (SMODS.Mods["CardSleeves"] or {}).can_load then
-  local sleeves, load_error = SMODS.load_file("src/sleeves.lua")
-  if load_error or sleeves == nil then
-    sendDebugMessage("The error is: "..load_error)
-  else
-    sleeves()
-  end
+  loadModule("src/sleeves.lua")
 end

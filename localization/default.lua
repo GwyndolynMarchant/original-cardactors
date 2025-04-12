@@ -20,7 +20,7 @@ return {
             j_ocs_rezzytail = {
                 name = 'Rezzy Tail',
                 text = {
-                    "Regenerates into a random Rezzy",
+                    "Regenerates into a random {C:attention}Rezzy{c:attention}",
                     "with random values at end of round"
                 }
             },
@@ -28,7 +28,7 @@ return {
                 name = 'Chippy Rezzy',
                 text = {
                     "{C:chips}+#1#{} chips.",
-                    "Generates a Tail when",
+                    "Generates a {C:attention}Tail{} when",
                     "destroyed or sold"
                 }
             },
@@ -36,7 +36,7 @@ return {
                 name = 'Rhythm Rezzy',
                 text = {
                     "{C:mult}+#1#{} mult.",
-                    "Generates a Tail when",
+                    "Generates a {C:attention}Tail{} when",
                     "destroyed or sold"
                 }
             },
@@ -45,7 +45,7 @@ return {
                 text = {
                     "Earn {C:money}+#1#{} at",
                     "end of round.",
-                    "Generates a Tail when",
+                    "Generates a {C:attention}Tail{} when",
                     "destroyed or sold"
                 }
             },
@@ -53,17 +53,35 @@ return {
                 name = 'X Rated Rezzy',
                 text = {
                     "{X:mult,C:white} X#1# {} Mult",
-                    "Generates a Tail when",
+                    "Generates a {C:attention}Tail{} when",
                     "destroyed or sold"
                 }
             },
             j_ocs_rezzylegend = {
                 name = 'Rezzy of Legend',
                 text = {
-                    "Retrigger all played cards {C:chips}+#1#{} times.",
-                    "Generates a Tail when",
+                    "Retrigger all played cards {C:attention}+#1#{} times.",
+                    "Generates a {C:attention}Tail{} when",
                     "destroyed or sold"
                 }
+            },
+            j_ocs_robomoof = {
+                name = "Damascene",
+                text = {
+                    "Gives {X:mult,C:white} X#1# {} Mult.",
+                    "Increases by {X:mult,C:white} X#2# {} per",
+                    "additional {C:attention}Damascene{}.",
+                    "(Starts at {X:mult,C:white} X#3# {} Mult.)"
+                }
+            },
+            j_ocs_sybilthroat = {
+                  name = 'Scandalous Sybil Throat',
+                  text = {
+                    '{C:attention}Capture{} any lone scored {C:attention}High Card{}',
+                    'Slowly transforms all other scored cards',
+                    'into the captured card',
+                    '{V:1}(#1#){}',
+                  }
             }
         },
         alt_texture = {
@@ -82,6 +100,10 @@ return {
             alt_tex_ocs_smol_blind = {
                 name = 'Small Blind: Smol Blind',
                 text = {'The blind is smol… uwu'}
+            },
+            alt_tex_ocs_showgirl = {
+                name = 'Showman: Showgirl Moof',
+                text = {'The showman is now','a delightful showgirl','wolf-cow!'}
             }
         },
         texture_packs = {
@@ -94,7 +116,8 @@ return {
                 localization = {
                     j_vampire = { name = "Vampire Batgirl" },
                     j_raised_fist = { name = "Rebel Against Judgement" },
-                    b_small = { name = "Smol Blind" }
+                    b_small = { name = "Smol Blind" },
+                    j_ring_master = { name = "Showgirl Moof" }
                 }
             }
         },
@@ -108,6 +131,22 @@ return {
                 text = {
                     "Start with an additional OC joker",
                     "plus one retextured joker"
+                }
+            }
+        },
+        Voucher = {
+            v_ocs_btech = {
+                name = "Balinological Technical Institute",
+                text = {
+                  "Gain an eternal {C:attention}#1#{}",
+                  "and {C:attention}+1 Joker slots{}"
+                }
+            },
+            v_ocs_bverse = {
+                name = "BTI Internal Access",
+                text = {
+                    "{C:attention}Duplicate{} jokers spawn",
+                    "with {C:attention}editions{}."
                 }
             }
         }

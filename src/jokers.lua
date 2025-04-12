@@ -93,288 +93,165 @@ SMODS.Joker{
     end
 }
 
-SMODS.Atlas {
-    key = 'rezzies', -- June, Balatro Genius alternates
-    path = "rezzies.png",
-    px = 71,
-    py = 95
-}
+loadModule("src/jokers/rezzies.lua")
 
--- Rezzy Tail
 SMODS.Joker{
-    key = "rezzytail",
-    rarity = 1,
-    atlas = 'rezzies',
+    key = "sybilthroat",
+    rarity = 3,
+    atlas = 'ocjokers',
     blueprint_compat = false,
-    pos = {x = 1, y = 1},
-    cost = 0,
-    in_pool = function(self)
-        return false
-    end,
-    calculate = function(self, card, context)
-        if context.end_of_round and not context.repetition and not context.individual and not context.blueprint then
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    play_sound('tarot1')
-                    card.T.r = -0.2
-                    card:juice_up(0.3, 0.4)
-                    card.states.drag.is = true
-                    card.children.center.pinch.x = true
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        delay = 0.3,
-                        blockable = false,
-                        func = function()
-                            G.jokers:remove_card(card)
-                            card:remove()
-                            card = nil
-                            return true
-                        end
-                    }))
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        delay = 0.3,
-                        blockable = false,
-                        func = function()
-                            -- I'm sorry for how this works but i'm very high right now and didn't want to figure it out better then this
-                            local rezzyRando = pseudorandom(pseudoseed("rezzytail"), 1 , 300)
-                            local rezzyChoice = 'j_ocs_rezzychips'
-                            if rezzyRando > 298 then
-                                rezzyChoice = 'j_ocs_rezzylegend'
-                            elseif rezzyRando > 280 then
-                                rezzyChoice = 'j_ocs_rezzyx'
-                            elseif rezzyRando > 200 then
-                                rezzyChoice =  'j_ocs_rezzycash'
-                            elseif rezzyRando > 100 then
-                                rezzyChoice = 'j_ocs_rezzymult'
-                            end
-                            _card = SMODS.add_card({
-                                set = "Joker",
-                                area = G.jokers,
-                                key = rezzyChoice
-                            })
-                            _card.ability.extra.rezzymainval = pseudorandom(pseudoseed("rezzytail"), _card.ability.extra.rezzyminval, _card.ability.extra.rezzymaxval)
-                            return true
-                        end
-                    }))
-                    return true
-                end
-            }))
-        end
-    end
-}
-
--- Chippy Rezzy
-SMODS.Joker{
-    key = "rezzychips",
-    rarity = 1,
-    atlas = 'rezzies',
-    blueprint_compat = true,
-    config = {extra = {rezzymainval = 10,rezzyminval = 10, rezzymaxval = 100}},
-    pos = {x = 0, y = 0},
-    cost = 3,
-    remove_from_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            G.E_MANAGER:add_event(Event({
-                func = function() 
-                    SMODS.add_card({
-                        set = "Joker",
-                        area = G.jokers,
-                        key = 'j_ocs_rezzytail'
-                    })
-                    return true 
-                end
-            }))
-        end
-    end,
-    in_pool = function(self)
-        if next(SMODS.find_card("showman")) then
-            return true
-        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
-            return false
-        end
-        return true
-    end,
+    config = {
+        extra = {
+            capcard = nil,
+        }
+    },
+    pos = {x = 1, y = 0},
+    cost = 9,
     loc_vars = function(self, info_queue, card)
-      return { vars = {card.ability.extra.rezzymainval} }
-    end,
-    calculate = function(self, card, context)
-        if context.joker_main then
+        if card.ability.extra.capcard == nil then
             return {
-                chips = card.ability.extra.rezzymainval
+                vars = {
+                    "None yet... ",
+                    colours = {
+                        G.C.UI.TEXT_INACTIVE
+                    }
+                }
+            }
+        else
+            -- Get capture details
+            local cap = card.ability.extra.capcard
+            local edition     = cap.edition and cap.edition.type or "Default"
+            local enhancement = cap.ability and cap.ability.name or "Default Base"
+
+            -- Load localization names
+            local a = edition     ~= "Default"      and G.localization.descriptions.Edition["e_" .. edition].name        .. " " or ""
+            local b = enhancement ~= "Default Base" and G.localization.descriptions.Enhanced[cap.config.center.key].name .. " " or ""
+            local z = cap.seal and " with " .. G.localization.descriptions.Other[string.lower(cap.seal) .. "_seal"].name or ""
+            return {
+                vars = {
+                    a .. b .. G.localization.misc.ranks[cap.base.value] .. ' of ' .. G.localization.misc.suits_plural[cap.base.suit] .. z,
+                    colours = {
+                        G.C.SUITS[cap.base.suit]
+                    }
+                },
             }
         end
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play then
+            if #G.play.cards == 1 then
+
+                -- Copy the card
+                card.ability.extra.capcard = {
+                    edition = context.other_card.edition, -- Edition
+                    base = {
+                        suit = context.other_card.base.suit, -- Suit
+                        value = context.other_card.base.value -- Rank
+                    },
+                    seal = context.other_card.seal, -- Seal
+
+                    -- Enhancements
+                    ability = copy_table(context.other_card.ability),
+                    config = {
+                        center = context.other_card.config.center
+                    }
+                }
+                return {
+                    message = "Captured!",
+                    colour = G.C.GREEN,
+                    delay = 0.45,
+                }
+            elseif card.ability.extra.capcard then
+                -- Emphasize the changes
+                context.other_card:juice_up()
+
+                local delta = {}
+                if (not context.other_card.edition or context.other_card.edition.type ~= card.ability.extra.capcard.edition.type) then delta["EDITION"] = true end
+                if (context.other_card.seal ~= card.ability.extra.capcard.seal) then delta["SEAL"] = true end
+                if (context.other_card.base.value ~= card.ability.extra.capcard.base.value) then delta["RANK"] = true end
+                if (context.other_card.base.suit ~= card.ability.extra.capcard.base.suit) then delta["SUIT"] = true end
+                if (context.other_card.ability.name ~= card.ability.extra.capcard.ability.name) then delta["ABILITY"] = true end
+
+                local _, e = pseudorandom_element(delta, pseudoseed("sybilthroat"))
+                sendDebugMessage("Element chose: " .. e)
+
+                if e == "EDITION" then context.other_card:set_edition(card.ability.extra.capcard.edition)
+                elseif e == "SEAL" then context.other_card:set_seal(card.ability.extra.capcard.seal)
+                elseif e == "RANK" then SMODS.change_base(context.other_card, context.other_card.base.suit, card.ability.extra.capcard.base.value)
+                elseif e == "SUIT" then SMODS.change_base(context.other_card, card.ability.extra.capcard.base.suit, context.other_card.base.value)
+                elseif e == "ABILITY" then
+                    -- Enhancements 
+                    context.other_card:set_ability(card.ability.extra.capcard.config.center)
+                    context.other_card.ability.type = card.ability.extra.capcard.ability.type
+                    for k, v in pairs(card.ability.extra.capcard.ability) do
+                        if type(v) == 'table' then 
+                            context.other_card.ability[k] = copy_table(v)
+                        else
+                            context.other_card.ability[k] = v
+                        end
+                    end
+                end
+
+                return {
+                    message = "TF!"
+                }
+            end
+        end
+        if context.destroy_card and context.cardarea == G.play then
+            -- Destroy the captured card
+            if #G.play.cards == 1 then
+                G.play.cards[1]:explode({G.C.GREEN})
+
+                return { remove = true }
+            end
+        end
     end
 }
 
--- Rhythm Rezzy
+local moofs = {
+    "j_ocs_robomoof"
+}
+
+function find_number_moofs()
+    local n = 0
+    for index, value in ipairs(moofs) do
+        local m = SMODS.find_card(value, false)
+        n = n + #m
+    end
+    return n
+end
+
 SMODS.Joker{
-    key = "rezzymult",
+    key = "robomoof",
     rarity = 1,
-    atlas = 'rezzies',
-    blueprint_compat = true,
-    config = {extra = {rezzymainval = 4,rezzyminval = 4, rezzymaxval = 20}},
+    atlas = 'ocjokers',
+    blueprint_compat = false,
     pos = {x = 2, y = 0},
     cost = 3,
-    remove_from_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            G.E_MANAGER:add_event(Event({
-                func = function() 
-                    SMODS.add_card({
-                        set = "Joker",
-                        area = G.jokers,
-                        key = 'j_ocs_rezzytail'
-                    })
-                    return true 
-                end
-            }))
-        end
-    end,
-    in_pool = function(self)
-        if next(SMODS.find_card("showman")) then
-            return true
-        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
-            return false
-        end
-        return true
-    end,
-    loc_vars = function(self, info_queue, card)
-      return { vars = {card.ability.extra.rezzymainval} }
-    end,
+    config = {
+        extra = {
+            base_xmult = 1.5,
+            addt_xmult = 1.0
+        }
+    },
     calculate = function(self, card, context)
         if context.joker_main then
             return {
-                mult = card.ability.extra.rezzymainval
+                xmult = card.ability.extra.base_xmult + (card.ability.extra.addt_xmult * (math.max(0, (find_number_moofs() - 1))))
             }
         end
-    end
-}
-
--- Ritzy Rezzy
-SMODS.Joker{
-    key = "rezzycash",
-    rarity = 2,
-    atlas = 'rezzies',
-    blueprint_compat = true,
-    config = {extra = {rezzymainval = 2,rezzyminval = 2, rezzymaxval = 10}},
-    pos = {x = 0, y = 1},
-    cost = 4,
-    remove_from_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            G.E_MANAGER:add_event(Event({
-                func = function() 
-                    SMODS.add_card({
-                        set = "Joker",
-                        area = G.jokers,
-                        key = 'j_ocs_rezzytail'
-                    })
-                    return true 
-                end
-            }))
-        end
-    end,
-    in_pool = function(self)
-        if next(SMODS.find_card("showman")) then
-            return true
-        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
-            return false
-        end
-        return true
     end,
     loc_vars = function(self, info_queue, card)
-      return { vars = {card.ability.extra.rezzymainval} }
-    end,
-    calc_dollar_bonus = function(self,card)
-        local bonus = card.ability.extra.rezzymainval
-        if bonus > 0 then return bonus end
-    end
-}
-
--- X Rated Rezzy
-SMODS.Joker{
-    key = "rezzyx",
-    rarity = 3,
-    atlas = 'rezzies',
-    blueprint_compat = true,
-    config = {extra = {rezzymainval = 11,rezzyminval = 11, rezzymaxval = 35}},
-    pos = {x = 1, y = 0},
-    cost = 6,
-    remove_from_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            G.E_MANAGER:add_event(Event({
-                func = function() 
-                    SMODS.add_card({
-                        set = "Joker",
-                        area = G.jokers,
-                        key = 'j_ocs_rezzytail'
-                    })
-                    return true 
-                end
-            }))
-        end
-    end,
-    in_pool = function(self)
-        if next(SMODS.find_card("showman")) then
-            return true
-        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
-            return false
-        end
-        return true
-    end,
-    loc_vars = function(self, info_queue, card)
-      return { vars = {card.ability.extra.rezzymainval * 0.1} }
-    end,
-    calculate = function(self, card, context)
-        if context.joker_main then
-            return {
-                xmult = card.ability.extra.rezzymainval * .1
+        return {
+            vars = {
+                card.ability.extra.base_xmult + (card.ability.extra.addt_xmult * (math.max(0, (find_number_moofs() - 1)))),
+                card.ability.extra.addt_xmult,
+                card.ability.extra.base_xmult
             }
-        end
-    end
-}
-
--- Rezzy of Legend
-SMODS.Joker{
-    key = "rezzylegend",
-    rarity = 4,
-    atlas = 'rezzies',
-    blueprint_compat = true,
-    config = {extra = {rezzymainval = 1,rezzyminval = 1, rezzymaxval = 3}},
-    pos = {x = 3, y = 0},
-    cost = 10,
-    soul_pos = {x = 3, y = 1 },
-    remove_from_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            G.E_MANAGER:add_event(Event({
-                func = function() 
-                    SMODS.add_card({
-                        set = "Joker",
-                        area = G.jokers,
-                        key = 'j_ocs_rezzytail'
-                    })
-                    return true 
-                end
-            }))
-        end
+        }
     end,
     in_pool = function(self)
-        if next(SMODS.find_card("showman")) then
-            return true
-        elseif next(SMODS.find_card("rezzychips")) or next(SMODS.find_card("rezzymult")) or next(SMODS.find_card("rezzycash")) or next(SMODS.find_card("rezzyx")) or next(SMODS.find_card("rezzylegend")) then
-            return false
-        end
-        return true
-    end,
-    loc_vars = function(self, info_queue, card)
-      return { vars = {card.ability.extra.rezzymainval} }
-    end,
-    calculate = function(self, card, context)
-        if context.cardarea == G.play and context.repetition and not context.repetition_only then
-            return {
-                message = 'Again!',
-                repetitions = card.ability.extra.rezzymainval,
-                card = context.other_card
-            }
-        end
+        return next(SMODS.find_card("j_ring_master")) and true or false
     end
 }
