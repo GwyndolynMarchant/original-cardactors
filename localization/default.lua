@@ -146,7 +146,8 @@ return {
                 name = "BTI Internal Access",
                 text = {
                     "{C:attention}Duplicate{} jokers spawn",
-                    "with {C:attention}editions{}."
+                    "with {C:attention}editions{}. Gain",
+                    "{C:attention}+1 Joker slots{}"
                 }
             }
         }
