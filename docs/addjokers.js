@@ -94,7 +94,9 @@ let jokers = [
   {
     name: "Damascene",
     text: [
-      'WORK IN PROGRESS'
+      "Gives {X:mult,C:white}X1.5{} Mult.",
+      "Increases by {X:mult,C:white} X1.0 {} per",
+      "additional {C:attention}Damascene{}.",
     ],
     image_url: "img/robomoof.png",
     rarity: "Common"
