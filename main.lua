@@ -63,6 +63,7 @@ loadModule("src/jokers.lua") -- Load Jokers
 loadModule("src/achievements.lua") -- Load Achievements
 loadModule("src/boosters.lua") -- Load Boosters
 loadModule("src/vouchers.lua") -- Load Vouchers
+loadModule("src/editions.lua") -- Load Editions
 
 -- REQUIRES: Malverk. Load replacement textures.
 if (SMODS.Mods["malverk"] or {}).can_load then
