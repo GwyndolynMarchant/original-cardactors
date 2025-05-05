@@ -1,6 +1,16 @@
+BALIATRO.Image {
+	key = "graceful-shine",
+	path = "graceful-shine.png",
+}
+
 SMODS.Shader {
 	key = "graceful",
-	path = "graceful.fs"
+	path = "graceful.fs",
+    send_vars = function (sprite, card)
+        return {
+            overlay = BALIATRO.Images['ocs_graceful-shine'].image
+        }
+    end,
 }
 
 SMODS.Edition {
@@ -13,7 +23,5 @@ SMODS.Edition {
 			"WIP"
 		},
 	},
-	get_weight = function(self)
-		return 0
-	end
+	in_shop = false,
 }

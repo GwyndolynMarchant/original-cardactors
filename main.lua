@@ -58,6 +58,11 @@ function get_usable_oc_cards()
   return _joker_list
 end
 
+
+-- Required libraries
+loadModule("lib/baliatro.lua") -- Image loading for shaders
+
+-- Main mod modules
 loadModule("src/decks.lua") -- Load Decks
 loadModule("src/jokers.lua") -- Load Jokers
 loadModule("src/achievements.lua") -- Load Achievements

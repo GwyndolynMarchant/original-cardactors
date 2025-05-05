@@ -4,18 +4,33 @@
     #define PRECISION mediump
 #endif
 
-// Look ionized.fs for explanation
+// !! change this variable name to your Shader's name
+// [card_tilt, time]
 extern PRECISION vec2 graceful;
 
+// Values of this variable:
+// self.ARGS.send_to_shader[1] = math.min(self.VT.r*3, 1) + (math.sin(G.TIMERS.REAL/28) + 1) + (self.juice and self.juice.r*20 or 0) + self.tilt_var.amt
+// self.ARGS.send_to_shader[2] = G.TIMERS.REAL
 extern PRECISION number dissolve;
 extern PRECISION number time;
-// (sprite_pos_x, sprite_pos_y, sprite_width, sprite_height) [not normalized]
+
+// [Note] texture_pos_x _y is not a pixel position!
+//        To get pixel position, you need to multiply  
+//        it by texture_width _height (look flipped.fs)
+// (texture_pos_x, texture_pos_y, texture_width, texture_height) [not normalized]
 extern PRECISION vec4 texture_details;
-// (width, height) for atlas texture [not normalized]
+
+// (width, height) for atlas texture [not normalized] ()
+// (image_width, image_height)
 extern PRECISION vec2 image_details;
+
+// Additional
 extern bool shadow;
 extern PRECISION vec4 burn_colour_1;
 extern PRECISION vec4 burn_colour_2;
+
+// Overlay
+extern Image overlay;
 
 // [Util]
 // Transform color from HSL to RGB 
@@ -29,46 +44,61 @@ vec4 HSL(vec4 c);
 // Apply dissolve effect (when card is being "burnt", e.g. when consumable is used)
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv);
 
-// This is what actually changes the look of card
+/** 
+ * Shader entrypoint for Love2D
+ * vec4     colour          The color set during love.graphics.setColor. 
+ * Image    texture         The image passed for the sprite
+ * vec2     texture_coords  The coordinates of the current pixel, relative to the image.
+ * vec2     screen_coords   The coordinates of the current pixel, relative to the screen.
+ */
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
     // Take pixel color (rgba) from `texture` at `texture_coords`, equivalent of texture2D in GLSL
+    // (rgba) tex = texture2D((Image) texture, (image_pos_x, image_pos_y) texture_coords)
     vec4 tex = Texel(texture, texture_coords);
-    // Position of a pixel within the sprite
-    vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-    float t = graceful.g + time;
-    float adjust_value = 0.1 * sin(t) + 0.5;
-    vec2 adjusted_uv = uv - vec2(adjust_value, adjust_value);
-    adjusted_uv.x = adjusted_uv.x*texture_details.b/texture_details.a;
-    adjusted_uv.y = adjusted_uv.y*texture_details.b/texture_details.a;
+    // Position of the pixel within the texture
+    // u = (image_pos_x * image_width  / texture_width ) - texture_pos_x
+    // v = (image_pos_y * image_height / texture_height) - texture_pos_y
+    vec2 uv = (texture_coords * image_details / texture_details.ba) - texture_details.xy;
+
+    vec4 over = Texel(overlay, uv);
 
     vec4 hsl = HSL(tex); // convert texture to HSL values
     vec4 bhsl = HSL(tex); // make a base copy of HSL values
-
-    if (bhsl.z > 0.95){
-        hsl.a = 0;
-    }
-
-    if (bhsl.a == 0){
-        hsl.a = 0;
-    }
     
+    // Shine from polychrome
+    float t = graceful.y*2.221 + time;
+    vec2 floored_uv = (floor((uv*texture_details.ba)))/texture_details.ba;
+    vec2 uv_scaled_centered = (floored_uv - 0.5) * 50.;
+    
+    vec2 field_part1 = uv_scaled_centered + 50.*vec2(sin(-t / 143.6340), cos(-t / 99.4324));
+    vec2 field_part2 = uv_scaled_centered + 50.*vec2(cos( t / 53.1532),  cos( t / 61.4532));
+    vec2 field_part3 = uv_scaled_centered + 50.*vec2(sin(-t / 87.53218), sin(-t / 49.0000));
+
+    float field = (1.+ (
+        cos(length(field_part1) / 19.483) + sin(length(field_part2) / 33.155) * cos(field_part2.y / 15.73) +
+        cos(length(field_part3) / 27.193) * sin(field_part3.x / 21.92) ))/2.;
+
+    float res = (.5 + .5* cos( (graceful.x) * 2.612 + ( field + -.5 ) *3.14));
+
     // Graceful color modification
-    if (graceful.g > 0.0 || graceful.g < 0.0) {
-        if (bhsl.y > 0.8) {
-            hsl.x = 330. / 360.;
-            hsl.y = (bhsl.z + 1.) / 2;
-            hsl.z = (bhsl.z + 0.75) / 2.;
-        } else {
-            hsl.x = 20. / 360.;
-            hsl.y = (bhsl.z + .8) / 2;
-            hsl.z = (bhsl.z + .6) / 2.;
-        }
+    if (bhsl.y > 0.8) {
+        // Pinks
+        hsl.x = ((330. + (cos(graceful.x * 1.5) * 30.)) / 360.) - (over.r * (cos(graceful.x * 2.) + 1.) * -.15);
+        hsl.y = (bhsl.z + 1.) / 2;
+        hsl.z = (bhsl.z + 0.75) / 2.;
+    } else {
+        // Oranges
+        hsl.x = ((20. + (cos(graceful.x * 1.5) * 20.)) / 360.) + (over.r * (cos(graceful.x * 2.) + 1.) * .15);
+        hsl.y = (bhsl.z + .8) / 2;
+        hsl.z = (bhsl.z + .6) / 2., .75;
     }
+
+    hsl.z = hsl.z + min((over.r * res), .1);
 
     // Mix with base texture
-    float ratio = .9;
+    float ratio = 1.;
     tex = ratio*RGB(hsl) + (1-ratio)*RGB(bhsl);
 
     // required
