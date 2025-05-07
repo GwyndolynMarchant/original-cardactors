@@ -1,5 +1,16 @@
 return {
     descriptions = {
+        Edition = {
+            e_ocs_graceful = {
+                name = "Graceful",
+                text = {
+                    'Does {C:edition,E:1}something{}.',
+                    'Will {C:attention}infect{} adjacent',
+                    'cards after a delay.',
+                    '{V:1}(#1#){}',
+                },
+            }
+        },
         Joker = {
             j_ocs_billiesblunder = {
                 name = 'Billie\'s Blunder',
@@ -159,5 +170,12 @@ return {
         achievement_descriptions = {
             ach_ocs_hyena = "Get all HYENA jokers (Hint: Malverk!)"
         },
+        dictionary = {
+            e_ready = "Ready!";
+            e_waiting = "Waiting…";
+        },
+        labels = {
+            ocs_graceful = "Graceful",
+        }
     }
 }

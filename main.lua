@@ -61,6 +61,7 @@ end
 
 -- Required libraries
 loadModule("lib/baliatro.lua") -- Image loading for shaders
+loadModule("lib/util.lua") -- Generic functions
 
 -- Main mod modules
 loadModule("src/decks.lua") -- Load Decks

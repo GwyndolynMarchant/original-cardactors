@@ -85,12 +85,12 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     // Graceful color modification
     if (bhsl.y > 0.8) {
         // Pinks
-        hsl.x = ((330. + (cos(graceful.x * 1.5) * 30.)) / 360.) - (over.r * (cos(graceful.x * 2.) + 1.) * -.15);
+        hsl.x = ((340. + (cos(graceful.x * 1.5) * 30.)) / 360.) - (over.r * (cos(graceful.x * 2.) + 1.) * -.15);
         hsl.y = (bhsl.z + 1.) / 2;
         hsl.z = (bhsl.z + 0.75) / 2.;
     } else {
         // Oranges
-        hsl.x = ((20. + (cos(graceful.x * 1.5) * 20.)) / 360.) + (over.r * (cos(graceful.x * 2.) + 1.) * .15);
+        hsl.x = ((35. + (cos(graceful.x * 1.5) * 20.)) / 360.) + (over.r * (cos(graceful.x * 2.) + 1.) * .15);
         hsl.y = (bhsl.z + .8) / 2;
         hsl.z = (bhsl.z + .6) / 2., .75;
     }
