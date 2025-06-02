@@ -13,6 +13,10 @@ UTIL.indexOf = function (array, value)
     return nil
 end
 
+UTIL.xor = function (a, b)
+    return (a and not b) or (b and not a)
+end
+
 UTIL.E.GetEditionFromCard = function(card)
     if card then
         if card.edition then

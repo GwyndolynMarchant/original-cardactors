@@ -95,6 +95,15 @@ return {
                   }
             }
         },
+        Spectral = {
+            c_ocs_install = {
+                name = 'Install',
+                text = {
+                    '{C:attention}Infect{} one joker or',
+                    'card with {C:edition,E:1}Graceful{}'
+                }
+            }
+        },
         alt_texture = {
             alt_tex_ocs_vampire_bat = {
                 name = 'Vampire: Vampire Batgirl',
