@@ -5,6 +5,17 @@ SMODS.Atlas {
 	path = "OC-booster.png"
 }
 
+-- Set up which Jokers can appear in boosters ---------------
+for _, v in ipairs(OCS.J.AllJokers) do
+  if v ~= 'j_ocs_rezzy_x' and v ~= 'j_ocs_rezzy_legend' then
+    table.insert(OCS.J.Booster, v)
+  end
+end
+for _, v in ipairs(OCS.J.Malverk) do
+  table.insert(OCS.J.Booster, v)
+end
+-------------------------------------------------------------
+
 SMODS.Booster({
 	key = "actors",
 	loc_txt = {
@@ -20,15 +31,15 @@ SMODS.Booster({
   config = { extra = 4, choose = 1 },
   kind = "ocs_pack",
   create_card = function(self, card, i)
-      local cardlist = get_usable_oc_cards()
-      return {set = "Joker", area = G.jokers, key = pseudorandom_element(cardlist, pseudoseed("ocspack")),  skip_materialize = true}
+      -- TODO: Need to stop duplicates from spawning
+      return {set = "Joker", area = G.jokers, key = pseudorandom_element(OCS.J.Booster, pseudoseed("ocspack")),  skip_materialize = true}
   end,
   loc_vars = function(self, info_queue, card)
       return { vars = { card.config.center.config.choose, card.ability.extra } }
   end,
 	ease_background_colour = function(self)
-		ease_colour(G.C.DYN_UI.MAIN, globals.OC_colors.pink)
-		ease_background_colour({ new_colour = globals.OC_colors.pink, special_colour = globals.OC_colors.black, contrast = 4 })
+		ease_colour(G.C.DYN_UI.MAIN, OCS.Color.pink)
+		ease_background_colour({ new_colour = OCS.Color.pink, special_colour = OCS.Color.black, contrast = 4 })
 	end
 })
 

@@ -28,14 +28,14 @@ return {
                     "highest stake June has defeated."
                 }
             },
-            j_ocs_rezzytail = {
+            j_ocs_rezzy_tail = {
                 name = 'Rezzy Tail',
                 text = {
                     "Regenerates into a random {C:attention}Rezzy{c:attention}",
                     "with random values at end of round"
                 }
             },
-            j_ocs_rezzychips = {
+            j_ocs_rezzy_chips = {
                 name = 'Chippy Rezzy',
                 text = {
                     "{C:chips}+#1#{} chips.",
@@ -43,7 +43,7 @@ return {
                     "destroyed or sold"
                 }
             },
-            j_ocs_rezzymult = {
+            j_ocs_rezzy_mult = {
                 name = 'Rhythm Rezzy',
                 text = {
                     "{C:mult}+#1#{} mult.",
@@ -51,7 +51,7 @@ return {
                     "destroyed or sold"
                 }
             },
-            j_ocs_rezzycash = {
+            j_ocs_rezzy_cash = {
                 name = 'Ritzy Rezzy',
                 text = {
                     "Earn {C:money}+#1#{} at",
@@ -60,7 +60,7 @@ return {
                     "destroyed or sold"
                 }
             },
-            j_ocs_rezzyx = {
+            j_ocs_rezzy_x = {
                 name = 'X Rated Rezzy',
                 text = {
                     "{X:mult,C:white} X#1# {} Mult",
@@ -68,7 +68,7 @@ return {
                     "destroyed or sold"
                 }
             },
-            j_ocs_rezzylegend = {
+            j_ocs_rezzy_legend = {
                 name = 'Rezzy of Legend',
                 text = {
                     "Retrigger all played cards {C:attention}+#1#{} times.",
@@ -76,7 +76,7 @@ return {
                     "destroyed or sold"
                 }
             },
-            j_ocs_robomoof = {
+            j_ocs_moof_dama = {
                 name = "Damascene",
                 text = {
                     "Gives {X:mult,C:white} X#1# {} Mult.",

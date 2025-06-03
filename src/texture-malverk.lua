@@ -45,3 +45,11 @@ TexturePack({
   },
   localization = true
 })
+
+-- Adding to index
+OCS.J.Malverk = {
+  'j_vampire',
+  'j_raised_fist',
+  'j_todo_list',
+  'j_ring_master'
+}
