@@ -95,13 +95,21 @@ return {
                 }
             },
             j_ocs_sybilthroat = {
-                  name = 'Scandalous Sybil Throat',
-                  text = {
+                name = 'Scandalous Sybil Throat',
+                text = {
                     '{C:attention}Capture{} any lone scored {C:attention}High Card{}',
                     'Slowly transforms all other scored cards',
                     'into the captured card',
                     '{V:1}(#1#){}',
-                  }
+                }
+            },
+            j_ocs_blackle = {
+                name = 'Blackle Mori',
+                text = {
+                    "{C:inactive}I would rather be{}",
+                    "{C:inactive}on IFDB.org...{}",
+                    "Do not play."
+                }
             }
         },
         Spectral = {
@@ -197,15 +205,17 @@ return {
             ach_ocs_hyena = "Get all HYENA jokers (Hint: Malverk!)"
         },
         dictionary = {
-            e_ready = "Ready!";
-            e_waiting = "Waiting…";
-            k_distant_planet = "Distant Planet";
+            e_ready = "Ready!",
+            e_waiting = "Waiting…",
+            k_distant_planet = "Distant Planet",
+            k_ocs_alien = "Alien",
         },
         poker_hands = {
             ["Flush Five"] = "Fish",
         },
         labels = {
             ocs_graceful = "Graceful",
+            k_ocs_alien = "Alien",
         }
     }
 }

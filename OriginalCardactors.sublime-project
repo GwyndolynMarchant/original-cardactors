@@ -7,8 +7,8 @@
         },
         {
         	"path": "docs",
-        	"name": "Website"
-        }
+        	"name": "Website",
+        },
 	],
     "build_systems":
     [
