@@ -81,8 +81,17 @@ return {
                 text = {
                     "Gives {X:mult,C:white} X#1# {} Mult.",
                     "Increases by {X:mult,C:white} X#2# {} per",
-                    "additional {C:attention}Damascene{}.",
+                    "additional {C:attention}Moof{}.",
                     "(Starts at {X:mult,C:white} X#3# {} Mult.)"
+                }
+            },
+            j_ocs_moof_torch = {
+                name = "Torchstone",
+                text = {
+                    "Gives {C:mult}+#1#{} Mult.",
+                    "Increases by {C:mult}+#2#{} per",
+                    "additional {C:attention}Moof{}.",
+                    "(Starts at {C:mult}+#3#{} Mult.)"
                 }
             },
             j_ocs_sybilthroat = {
