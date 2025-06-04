@@ -34,6 +34,17 @@ AltTexture({
   keys = { 'j_ring_master' },
 })
 
+AltTexture({
+  key = 'suricrasia',
+  set = 'Planet',
+  path = 'suricrasia.png',
+  keys = { 'c_eris' }
+})
+
+Malverk.badges.distant_planet = function(self, card, badges)
+  badges[#badges + 1] = create_badge(localize('k_distant_planet'), G.C.SECONDARY_SET.Planet, nil, 1.2)
+end
+
 TexturePack({
   key = 'OCs',
   textures = {
@@ -41,7 +52,8 @@ TexturePack({
     'ocs_smol_blind',
     'ocs_billie_fist',
     'ocs_todo_hyena',
-    'ocs_showgirl'
+    'ocs_showgirl',
+    'ocs_suricrasia'
   },
   localization = true
 })

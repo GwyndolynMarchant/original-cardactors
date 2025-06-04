@@ -133,6 +133,10 @@ return {
             alt_tex_ocs_showgirl = {
                 name = 'Showman: Showgirl Moof',
                 text = {'The showman is now','a delightful showgirl','wolf-cow!'}
+            },
+            alt_tex_ocs_suricrasia = {
+                name = 'Eris: Suricrasia',
+                text = {'The planet Eris has been','replaced with Suricrasia','from the Ylastravenya system!'}
             }
         },
         texture_packs = {
@@ -146,7 +150,11 @@ return {
                     j_vampire = { name = "Vampire Batgirl" },
                     j_raised_fist = { name = "Rebel Against Judgement" },
                     b_small = { name = "Smol Blind" },
-                    j_ring_master = { name = "Showgirl Moof" }
+                    j_ring_master = { name = "Showgirl Moof" },
+                    c_eris = {
+                        name = "Suricrasia",
+                        badge = "distant_planet"
+                    }
                 }
             }
         },
@@ -191,6 +199,10 @@ return {
         dictionary = {
             e_ready = "Ready!";
             e_waiting = "Waiting…";
+            k_distant_planet = "Distant Planet";
+        },
+        poker_hands = {
+            ["Flush Five"] = "Fish",
         },
         labels = {
             ocs_graceful = "Graceful",
