@@ -77,11 +77,14 @@ SMODS.Joker{
     end,
     rarity = 2,
     atlas = 'junebug',
-    pos = { x = 0, y = 0 }, -- TODO: Dynamically change X based on stake beaten
+    pos = { x = 0, y = 0 },
     cost = 5,
     eternal_compat = true,
     perishable_compat = true,
     blueprint_compat = true,
+    set_sprites = function(self, card, front)
+        card.children.center:set_sprite_pos({ x = get_joker_win_sticker(self,true) or 0, y = 0 })
+    end,
     calculate = function(self, card, context)
         if context.joker_main then
             local xmult = (get_joker_win_sticker(self,true) + 1) * (card.ability.extra.xmult_mod) + 1
