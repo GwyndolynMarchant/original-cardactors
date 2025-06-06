@@ -33,6 +33,7 @@ SMODS.Consumable {
 	pos = { x = 1, y = 0 },
 	can_use = function(self, card) return true end,
 	use = function(self, card, area, copier)
+		-- TODO: CRASHES WHEN ENCOUNTERING GRACEFUL CARDS
 		SMODS.destroy_cards(G.hand.cards)
 		SMODS.destroy_cards(G.jokers.cards)
 		-- SMODS.destroy_cards(G.consumeables.cards)

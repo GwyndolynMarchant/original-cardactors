@@ -1,7 +1,13 @@
 UTIL = {
     DEBUG = {},
-    E = {}
+    E = {},
+    J = {}
 }
+
+UTIL.J.CheckKey = function(card, key)
+    UTIL.DEBUG.Print("card key", card.config.center.key)
+    return card.config.center.key == key
+end
 
 -- Return the first index with the given value (or nil if not found).
 UTIL.indexOf = function (array, value)

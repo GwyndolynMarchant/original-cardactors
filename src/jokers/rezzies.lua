@@ -48,12 +48,19 @@ SMODS.Joker{
                             return true
                         end
                     }))
-                    if card.edition and card.edition.type == "negative" then
+                    if UTIL.E.GetEditionFromCard(card) == "negative" then
                         G.E_MANAGER:add_event(Event({
                             trigger = 'after',
                             delay = 0.3,
                             blockable = false,
                             func = function () return REZZY.create('j_ocs_rezzy_offworld') end
+                        }))
+                    elseif UTIL.E.GetEditionFromCard(card) == "ocs_graceful" then
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'after',
+                            delay = 0.3,
+                            blockable = false,
+                            func = function () return REZZY.create('j_ocs_rezzy_graceful') end
                         }))
                     else
                         G.E_MANAGER:add_event(Event({
@@ -239,6 +246,35 @@ SMODS.Joker{
     end
 }
 
+SMODS.Joker {
+    key = "rezzy_graceful",
+    rarity = 3,
+    atlas = 'rezzies',
+    blueprint_compat = false,
+    config = {extra = {rezzymainval = 2,rezzyminval = 2, rezzymaxval = 4}},
+    pos = {x = 2, y = 1},
+    cost = 6,
+    remove_from_deck = REZZY.remove,
+    in_pool = REZZY.pool,
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.rezzymainval }
+        }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            score_mod_chosen = pseudorandom_element({"chips", "mult", "xmult", "dollars"}, pseudoseed("graceful"))
+            score_mod_amount = pseudorandom(pseudoseed("graceful"), OCS.E.Graceful.score_mod_min[score_mod_chosen], OCS.E.Graceful.score_mod_max[score_mod_chosen]) * self.config.extra.rezzymainval
+            if score_mod_chosen == "chips"   then return { chips   = score_mod_amount } end
+            if score_mod_chosen == "mult"    then return { mult    = score_mod_amount } end
+            if score_mod_chosen == "xmult"   then return { xmult   = score_mod_amount } end
+            if score_mod_chosen == "dollars" then return { dollars = score_mod_amount } end
+        end
+    end
+}
+
+UTIL.appendList(OCS.J.Ungraceful, { "j_ocs_rezzy_graceful" })
+
 -- Write index information
 OCS.J.Rezzies = {
     "j_ocs_rezzy_tail",
@@ -248,6 +284,7 @@ OCS.J.Rezzies = {
     "j_ocs_rezzy_x",
     "j_ocs_rezzy_legend",
     "j_ocs_rezzy_offworld",
+    "j_ocs_rezzy_graceful",
 }
 
 -- Append rezzies to central index

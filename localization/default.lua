@@ -85,6 +85,17 @@ return {
                     "destroyed or sold"
                 }
             },
+            j_ocs_rezzy_graceful = {
+                name = "Graceful Rezzy",
+                text = {
+                    'Does {C:edition,E:1}something{}',
+                    '{C:attention}#1#{} times more powerful',
+                    'than a {C:attention}graceful{} card.',
+                    "Generates a {C:attention}Tail{} when",
+                    "destroyed or sold",
+                    "Cannot be further {C:attention}graced{}."
+                }
+            },
             j_ocs_moof_dama = {
                 name = "Damascene",
                 text = {

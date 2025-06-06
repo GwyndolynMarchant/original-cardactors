@@ -13,6 +13,20 @@ SMODS.Shader {
     end,
 }
 
+OCS.E.Graceful = {}
+OCS.E.Graceful.score_mod_min = {
+	chips = -5,
+	mult = -1,
+	xmult = 0.8,
+	dollars = -2,
+}
+OCS.E.Graceful.score_mod_max = {
+	chips = 30,
+	mult = 10,
+	xmult = 2.0,
+	dollars = 5,
+}
+
 SMODS.Edition {
 	key = "graceful",
 	shader = "graceful",
@@ -21,18 +35,8 @@ SMODS.Edition {
 		extra = {
 			fresh = true,
 			score_mod = { "chips", "mult", "xmult", "dollars" },
-			score_mod_min = {
-				chips = -5,
-				mult = -1,
-				xmult = 0.8,
-				dollars = -2,
-			},
-			score_mod_max = {
-				chips = 30,
-				mult = 10,
-				xmult = 2.0,
-				dollars = 5,
-			},
+			score_mod_min = OCS.E.Graceful.score_mod_min,
+			score_mod_max = OCS.E.Graceful.score_mod_max
 		},
 	},
 	loc_vars = function(self, info_queue, card)
@@ -58,12 +62,18 @@ SMODS.Edition {
 			i = UTIL.indexOf(area, c)
 			if i == nil then return end
 			if i > 1 and (i - 1) >= 1 then
-				if UTIL.E.GetEditionFromCard(area[i-1]) ~= "ocs_graceful" then
+				if
+					UTIL.E.GetEditionFromCard(area[i-1]) ~= "ocs_graceful"
+					and not UTIL.J.CheckKey(area[i-1], "j_ocs_rezzy_graceful")
+				then
 					area[i-1]:set_edition("e_ocs_graceful")
 				end
 			end
 			if i < #area and (i + 1) <= #area then
-				if UTIL.E.GetEditionFromCard(area[i+1]) ~= "ocs_graceful" then
+				if
+					UTIL.E.GetEditionFromCard(area[i+1]) ~= "ocs_graceful"
+					and not UTIL.J.CheckKey(area[i+1], "j_ocs_rezzy_graceful")
+				then
 					area[i+1]:set_edition("e_ocs_graceful")
 				end
 			end

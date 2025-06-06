@@ -18,8 +18,10 @@ OCS = {
     Aliens = {},
     Malverk = {},
     Booster = {},
-    Deck = {}
+    Deck = {},
+    Ungraceful = {},
   },
+  E = {},
   Color = {
     pink = HEX('D500B8'),
     black = HEX('000000')
