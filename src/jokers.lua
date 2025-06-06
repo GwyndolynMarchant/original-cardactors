@@ -5,12 +5,6 @@ SMODS.Atlas {
     py = 95
 }
 
-SMODS.Rarity {
-    key = "alien",
-    badge_colour = G.C.BLACK,
-    default_weight = 0.01
-}
-
 -- Billie's Blunder
 SMODS.Joker {
     key = 'billiesblunder',
@@ -213,28 +207,15 @@ SMODS.Joker{
     end
 }
 
-SMODS.Joker{
-    key = "blackle",
-    atlas = "ocjokers",
-    pos = { x = 0, y = 1 },
-    soul_pos = {x = 1, y = 1 },
-    rarity = "ocs_alien",
-    cost = 50,
-    blueprint_compat = false,
-    eternal_compat = false,
-    calculate = function(self, card, context)
-        if context.joker_main then 
-            G.STATE = G.STATES.GAME_OVER
-            G.STATE_COMPLETE = false
-        end
-    end,
-}
-
 OCS.J.AllJokers = {
     "j_ocs_billiesblunder",
     "j_ocs_geniusjunebug",
-    "j_ocs_sybilthroat"
+    "j_ocs_sybilthroat",
 }
 
+-- Includes Alien rarity
+loadModule("src/jokers/aliens.lua")
+
+-- Species
 loadModule("src/jokers/rezzies.lua")
 loadModule("src/jokers/moofs.lua")

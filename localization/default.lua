@@ -76,6 +76,15 @@ return {
                     "destroyed or sold"
                 }
             },
+            j_ocs_rezzy_offworld = {
+                name = "Offworld Rezzy",
+                text = {
+                    "{C:inactive}From negative space...{}",
+                    "{X:chips,C:white} X#1# {} Chips",
+                    "Generates a {C:attention}Tail{} when",
+                    "destroyed or sold"
+                }
+            },
             j_ocs_moof_dama = {
                 name = "Damascene",
                 text = {
@@ -110,7 +119,14 @@ return {
                     "{C:inactive}on IFDB.org...{}",
                     "Do not play."
                 }
-            }
+            },
+            j_ocs_qcc = {
+                name = "Quecey",
+                text = {
+                    "{C:mult}+#1#{} Mult.",
+                    "{C:inactive}Loves mods!{}"
+                }
+            },
         },
         Spectral = {
             c_ocs_install = {
@@ -118,6 +134,14 @@ return {
                 text = {
                     '{C:attention}Infect{} one joker or',
                     'card with {C:edition,E:1}Graceful{}'
+                }
+            },
+            c_ocs_launch = {
+                name = "Launch",
+                text = {
+                    '{C:red,E:2}Destroy all{} jokers and',
+                    'cards in hand. {C:attention}Summon{}',
+                    'an {X:black,C:white}Alien{}'
                 }
             }
         },

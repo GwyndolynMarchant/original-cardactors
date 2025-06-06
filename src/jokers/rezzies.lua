@@ -5,6 +5,18 @@ SMODS.Atlas {
     py = 95
 }
 
+REZZY = {}
+
+REZZY.create = function(key)
+    _card = SMODS.add_card({
+        set = "Joker",
+        area = G.jokers,
+        key = key
+    })
+    _card.ability.extra.rezzymainval = pseudorandom(pseudoseed("rezzy_tail"), _card.ability.extra.rezzyminval, _card.ability.extra.rezzymaxval)
+    return true
+end
+
 -- Rezzy Tail
 SMODS.Joker{
     key = "rezzy_tail",
@@ -36,32 +48,35 @@ SMODS.Joker{
                             return true
                         end
                     }))
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        delay = 0.3,
-                        blockable = false,
-                        func = function()
-                            -- I'm sorry for how this works but i'm very high right now and didn't want to figure it out better then this
-                            local rezzyRando = pseudorandom(pseudoseed("rezzy_tail"), 1 , 300)
-                            local rezzyChoice = 'j_ocs_rezzy_chips'
-                            if rezzyRando > 298 then
-                                rezzyChoice = 'j_ocs_rezzy_legend'
-                            elseif rezzyRando > 280 then
-                                rezzyChoice = 'j_ocs_rezzy_x'
-                            elseif rezzyRando > 200 then
-                                rezzyChoice =  'j_ocs_rezzy_cash'
-                            elseif rezzyRando > 100 then
-                                rezzyChoice = 'j_ocs_rezzy_mult'
+                    if card.edition and card.edition.type == "negative" then
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'after',
+                            delay = 0.3,
+                            blockable = false,
+                            func = function () return REZZY.create('j_ocs_rezzy_offworld') end
+                        }))
+                    else
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'after',
+                            delay = 0.3,
+                            blockable = false,
+                            func = function()
+                                -- I'm sorry for how this works but i'm very high right now and didn't want to figure it out better then this
+                                local rezzyRando = pseudorandom(pseudoseed("rezzy_tail"), 1 , 300)
+                                if rezzyRando > 298 then
+                                    return REZZY.create('j_ocs_rezzy_legend')
+                                elseif rezzyRando > 280 then
+                                    return REZZY.create('j_ocs_rezzy_x')
+                                elseif rezzyRando > 200 then
+                                    return REZZY.create('j_ocs_rezzy_cash')
+                                elseif rezzyRando > 100 then
+                                    return REZZY.create('j_ocs_rezzy_mult')
+                                else
+                                    return REZZY.create('j_ocs_rezzy_chips')
+                                end
                             end
-                            _card = SMODS.add_card({
-                                set = "Joker",
-                                area = G.jokers,
-                                key = rezzyChoice
-                            })
-                            _card.ability.extra.rezzymainval = pseudorandom(pseudoseed("rezzy_tail"), _card.ability.extra.rezzyminval, _card.ability.extra.rezzymaxval)
-                            return true
-                        end
-                    }))
+                        }))
+                    end
                     return true
                 end
             }))
@@ -69,22 +84,23 @@ SMODS.Joker{
     end
 }
 
-function rezzyloc(self, info_queue, card)
+REZZY.localization = function (self, info_queue, card)
     info_queue[#info_queue+1] = G.P_CENTERS.j_ocs_rezzy_tail 
     return { vars = {card.ability.extra.rezzymainval} }
 end
 
-function rezzypool(self)
+REZZY.pool = function (self)
     if next(SMODS.find_card("j_ring_master")) then
         return true
-    elseif next(SMODS.find_card("j_ocs_rezzy_chips")) or next(SMODS.find_card("j_ocs_rezzy_mult")) or next(SMODS.find_card("j_ocs_rezzy_cash")) or next(SMODS.find_card("j_ocs_rezzy_x")) or next(SMODS.find_card("j_ocs_rezzy_legend")) then
-        return false
     else
+        for i,v in ipairs(OCS.J.Rezzies) do
+            if next(SMODS.find_card(v)) then return false end
+        end
         return true
     end
 end
 
-function rezzyremove(self, card, from_debuff)
+REZZY.remove = function (self, card, from_debuff)
     if not from_debuff then
         G.E_MANAGER:add_event(Event({
             func = function() 
@@ -108,14 +124,12 @@ SMODS.Joker{
     config = {extra = {rezzymainval = 10,rezzyminval = 10, rezzymaxval = 100}},
     pos = {x = 0, y = 0},
     cost = 3,
-    remove_from_deck = rezzyremove,
-    in_pool = rezzypool,
-    loc_vars = rezzyloc,
+    remove_from_deck = REZZY.remove,
+    in_pool = REZZY.pool,
+    loc_vars = REZZY.localization,
     calculate = function(self, card, context)
         if context.joker_main then
-            return {
-                chips = card.ability.extra.rezzymainval
-            }
+            return { chips = card.ability.extra.rezzymainval }
         end
     end
 }
@@ -129,14 +143,12 @@ SMODS.Joker{
     config = {extra = {rezzymainval = 4,rezzyminval = 4, rezzymaxval = 20}},
     pos = {x = 2, y = 0},
     cost = 3,
-    remove_from_deck = rezzyremove,
-    in_pool = rezzypool,
-    loc_vars = rezzyloc,
+    remove_from_deck = REZZY.remove,
+    in_pool = REZZY.pool,
+    loc_vars = REZZY.localization,
     calculate = function(self, card, context)
         if context.joker_main then
-            return {
-                mult = card.ability.extra.rezzymainval
-            }
+            return { mult = card.ability.extra.rezzymainval }
         end
     end
 }
@@ -150,14 +162,19 @@ SMODS.Joker{
     config = {extra = {rezzymainval = 2,rezzyminval = 2, rezzymaxval = 10}},
     pos = {x = 0, y = 1},
     cost = 4,
-    remove_from_deck = rezzyremove,
-    in_pool = rezzypool,
-    loc_vars = rezzyloc,
+    remove_from_deck = REZZY.remove,
+    in_pool = REZZY.pool,
+    loc_vars = REZZY.localization,
     calc_dollar_bonus = function(self,card)
         local bonus = card.ability.extra.rezzymainval
         if bonus > 0 then return bonus end
     end
 }
+
+REZZY.localization_x = function(self, info_queue, card)
+    info_queue[#info_queue+1] = G.P_CENTERS.j_ocs_rezzy_tail
+    return { vars = {card.ability.extra.rezzymainval * .1} }
+end
 
 -- X Rated Rezzy
 SMODS.Joker{
@@ -168,17 +185,12 @@ SMODS.Joker{
     config = {extra = {rezzymainval = 11,rezzyminval = 11, rezzymaxval = 35}},
     pos = {x = 1, y = 0},
     cost = 6,
-    remove_from_deck = rezzyremove,
-    in_pool = rezzypool,
-    loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS.j_ocs_rezzy_tail
-        return { vars = {card.ability.extra.rezzymainval * .1} }
-    end,
+    remove_from_deck = REZZY.remove,
+    in_pool = REZZY.pool,
+    loc_vars = REZZY.localization_x,
     calculate = function(self, card, context)
         if context.joker_main then
-            return {
-                xmult = card.ability.extra.rezzymainval * .1
-            }
+            return { xmult = card.ability.extra.rezzymainval * .1 }
         end
     end
 }
@@ -193,9 +205,9 @@ SMODS.Joker{
     pos = {x = 3, y = 0},
     cost = 10,
     soul_pos = {x = 3, y = 1 },
-    remove_from_deck = rezzyremove,
-    in_pool = rezzypool,
-    loc_vars = rezzyloc,
+    remove_from_deck = REZZY.remove,
+    in_pool = REZZY.pool,
+    loc_vars = REZZY.localization,
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.repetition and not context.repetition_only then
             return {
@@ -207,6 +219,26 @@ SMODS.Joker{
     end
 }
 
+-- Offworld Rezzy
+SMODS.Joker{
+    key = "rezzy_offworld",
+    rarity = "ocs_alien",
+    atlas = 'rezzies',
+    blueprint_compat = true,
+    config = {extra = {rezzymainval = 11,rezzyminval = 11, rezzymaxval = 35}},
+    pos = {x = 4, y = 0},
+    soul_pos = {x = 4, y = 1 },
+    cost = 12,
+    remove_from_deck = REZZY.remove,
+    in_pool = REZZY.pool,
+    loc_vars = REZZY.localization_x,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return { xchips = card.ability.extra.rezzymainval * .1 }
+        end
+    end
+}
+
 -- Write index information
 OCS.J.Rezzies = {
     "j_ocs_rezzy_tail",
@@ -214,7 +246,8 @@ OCS.J.Rezzies = {
     "j_ocs_rezzy_mult",
     "j_ocs_rezzy_cash",
     "j_ocs_rezzy_x",
-    "j_ocs_rezzy_legend"
+    "j_ocs_rezzy_legend",
+    "j_ocs_rezzy_offworld",
 }
 
 -- Append rezzies to central index

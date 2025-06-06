@@ -15,6 +15,7 @@ OCS = {
     AllJokers = {},
     Rezzies = {},
     Moofs = {},
+    Aliens = {},
     Malverk = {},
     Booster = {},
     Deck = {}

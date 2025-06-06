@@ -25,3 +25,21 @@ SMODS.Consumable {
 	    choice:set_edition("e_ocs_graceful")
 	end
 }
+
+SMODS.Consumable {
+	key = "launch",
+	set = "Spectral",
+	atlas = "ocspectrals",
+	pos = { x = 1, y = 0 },
+	can_use = function(self, card) return true end,
+	use = function(self, card, area, copier)
+		SMODS.destroy_cards(G.hand.cards)
+		SMODS.destroy_cards(G.jokers.cards)
+		-- SMODS.destroy_cards(G.consumeables.cards)
+		SMODS.add_card({
+			set = "Joker",
+			area = G.jokers,
+			rarity = "ocs_alien"
+		})
+	end
+}
