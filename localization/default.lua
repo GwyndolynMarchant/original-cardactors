@@ -82,6 +82,15 @@ return {
                     'into the captured card',
                     '{V:1}(#1#){}',
                   }
+            },
+            j_ocs_viz_hoard = {
+                name = 'Hoarding Problem',
+                text = {
+                   "This Joker gains {X:mult,C:white} X#1# {} Mult",
+                   "per scoring {C:attention}Gold{} card played.",
+                   "Destroys card.",
+                   "{C:inactive}(Currently {}{X:mult,C:white} X#2# {}{C:inactive} Mult){}"
+                }
             }
         },
         alt_texture = {

@@ -255,3 +255,41 @@ SMODS.Joker{
         return next(SMODS.find_card("j_ring_master")) and true or false
     end
 }
+
+SMODS.Joker {
+    key = "viz_hoard",
+    rarity = 3,
+    atlas = 'ocjokers',
+    blueprint_compat = true,
+    pos = { x = 0, y = 1 },
+    cost = 9,
+    config = {
+        extra = {
+            xmult = 1.0,
+            addt = 0.2
+        }
+    },
+    calculate = function(self, card, context)
+        if context.destroy_card and context.cardarea == G.play then
+            if SMODS.has_enhancement(context.destroy_card, "m_gold") then
+                return {
+                    remove = true
+                }
+            end
+        elseif context.remove_playing_cards and #context.removed > 0 then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.addt * #context.removed
+        elseif context.joker_main then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end,
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                card.ability.extra.addt,
+                card.ability.extra.xmult
+            }
+        }
+    end,
+}
