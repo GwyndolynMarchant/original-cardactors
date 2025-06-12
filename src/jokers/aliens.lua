@@ -40,7 +40,7 @@ SMODS.Joker {
         ["aliens"] = true
     },
     calculate = function(self, card, context)
-        if context.joker_main then return { mult = #SMODS.Mods } end
+        if context.joker_main then return { mult = #SMODS.mod_list } end
     end,
     loc_vars = function(self, info_queue, card)
         return { vars = { #SMODS.mod_list }, }
