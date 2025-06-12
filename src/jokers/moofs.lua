@@ -2,7 +2,7 @@ MOOF = {}
 
 MOOF.raw_num = function ()
     local n = 0
-    for _, value in ipairs(OCS.J.Moofs) do
+    for _, value in ipairs(G.P_CENTER_POOLS["moofs"]) do
         local m = SMODS.find_card(value, false)
         n = n + #m
     end
@@ -29,6 +29,8 @@ MOOF.loc_vars_internal = function (card, suffix)
     }
 end
 
+SMODS.ObjectType { key = "moofs" }
+
 SMODS.Joker{
     key = "moof_dama",
     rarity = 1,
@@ -41,6 +43,10 @@ SMODS.Joker{
             base_xmult = 1.5,
             addt_xmult = 1.0,
         }
+    },
+    pools = {
+        ["alljokers"] = true,
+        ["moofs"] = true
     },
     calculate = function(self, card, context)
         if context.joker_main then
@@ -66,6 +72,10 @@ SMODS.Joker {
             addt_mult = 8,
         }
     },
+    pools = {
+        ["alljokers"] = true,
+        ["moofs"] = true
+    },
     calculate = function(self, card, context)
         if context.joker_main then
             return { mult = MOOF.calc_internal(card, "mult") }
@@ -76,12 +86,3 @@ SMODS.Joker {
     end,
     in_pool = MOOF.pool,
 }
-
--- Write index information
-OCS.J.Moofs = {
-    "j_ocs_moof_dama",
-    "j_ocs_moof_torch"
-}
-
--- Append moofs to central index
-UTIL.appendList(OCS.J.AllJokers, OCS.J.Moofs)

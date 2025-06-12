@@ -11,16 +11,6 @@ ocConfig = SMODS.current_mod.config
 
 -- Global lists necessary for module interoperability
 OCS = {
-  J = {
-    AllJokers = {},
-    Rezzies = {},
-    Moofs = {},
-    Aliens = {},
-    Malverk = {},
-    Booster = {},
-    Deck = {},
-    Ungraceful = {},
-  },
   E = {},
   Color = {
     pink = HEX('D500B8'),

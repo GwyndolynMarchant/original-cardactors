@@ -5,6 +5,13 @@ SMODS.Atlas {
     py = 95
 }
 
+-- All Jokers
+SMODS.ObjectType {
+    key = "alljokers",
+    default = "j_ocs_rezzy_tail",
+}
+
+
 -- Billie's Blunder
 SMODS.Joker {
     key = 'billiesblunder',
@@ -23,6 +30,9 @@ SMODS.Joker {
     atlas = 'ocjokers',
     pos = { x = 0, y = 0 },
     cost = 4,
+    pools = {
+        ["alljokers"] = true
+    },
     eternal_compat = true,
     perishable_compat = true,
     blueprint_compat = true,
@@ -79,6 +89,9 @@ SMODS.Joker{
     atlas = 'junebug',
     pos = { x = 0, y = 0 },
     cost = 5,
+    pools = {
+        ["alljokers"] = true
+    },
     eternal_compat = true,
     perishable_compat = true,
     blueprint_compat = true,
@@ -108,6 +121,9 @@ SMODS.Joker{
     },
     pos = {x = 1, y = 0},
     cost = 9,
+    pools = {
+        ["alljokers"] = true
+    },
     loc_vars = function(self, info_queue, card)
         if card.ability.extra.capcard == nil then
             return {
@@ -217,6 +233,9 @@ SMODS.Joker {
     blueprint_compat = true,
     pos = { x = 0, y = 2 },
     cost = 9,
+    pools = {
+        ["alljokers"] = true
+    },
     config = {
         extra = {
             xmult = 1.0,
@@ -255,6 +274,9 @@ SMODS.Joker {
     blueprint_compat = true,
     pos = { x = 1, y = 2 },
     cost = 5,
+    pools = {
+        ["alljokers"] = true
+    },
     config = {
         extra = 10
     },
@@ -278,14 +300,6 @@ SMODS.Joker {
             vars = { card.ability.extra }
         }
     end
-}
-
-OCS.J.AllJokers = {
-    "j_ocs_billiesblunder",
-    "j_ocs_geniusjunebug",
-    "j_ocs_sybilthroat",
-    "j_ocs_viz_hoard",
-    "j_ocs_viz_gunpla",
 }
 
 -- Includes Alien rarity

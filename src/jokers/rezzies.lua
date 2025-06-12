@@ -5,11 +5,13 @@ SMODS.Atlas {
     py = 95
 }
 
+SMODS.ObjectType { key = "rezzies" }
+
 REZZY = {}
 
 REZZY.create = function(key)
     _card = SMODS.add_card({
-        set = "Joker",
+        set = "rezzies",
         area = G.jokers,
         key = key
     })
@@ -25,6 +27,10 @@ SMODS.Joker{
     blueprint_compat = false,
     pos = {x = 1, y = 1},
     cost = 0,
+    pools = {
+        ["alljokers"] = true,
+        ["rezzies"] = true
+    },
     in_pool = function(self)
         return false
     end,
@@ -100,7 +106,7 @@ REZZY.pool = function (self)
     if next(SMODS.find_card("j_ring_master")) then
         return true
     else
-        for i,v in ipairs(OCS.J.Rezzies) do
+        for i,v in ipairs(G.P_CENTER_POOLS["rezzies"]) do
             if next(SMODS.find_card(v)) then return false end
         end
         return true
@@ -111,11 +117,7 @@ REZZY.remove = function (self, card, from_debuff)
     if not from_debuff then
         G.E_MANAGER:add_event(Event({
             func = function() 
-                SMODS.add_card({
-                    set = "Joker",
-                    area = G.jokers,
-                    key = 'j_ocs_rezzy_tail'
-                })
+                SMODS.add_card({ set = "rezzies", area = G.jokers, key = 'j_ocs_rezzy_tail' })
                 return true 
             end
         }))
@@ -132,6 +134,10 @@ SMODS.Joker{
     pos = {x = 0, y = 0},
     cost = 3,
     remove_from_deck = REZZY.remove,
+    pools = {
+        ["alljokers"] = true,
+        ["rezzies"] = true
+    },
     in_pool = REZZY.pool,
     loc_vars = REZZY.localization,
     calculate = function(self, card, context)
@@ -151,6 +157,10 @@ SMODS.Joker{
     pos = {x = 2, y = 0},
     cost = 3,
     remove_from_deck = REZZY.remove,
+    pools = {
+        ["alljokers"] = true,
+        ["rezzies"] = true
+    },
     in_pool = REZZY.pool,
     loc_vars = REZZY.localization,
     calculate = function(self, card, context)
@@ -170,6 +180,10 @@ SMODS.Joker{
     pos = {x = 0, y = 1},
     cost = 4,
     remove_from_deck = REZZY.remove,
+    pools = {
+        ["alljokers"] = true,
+        ["rezzies"] = true
+    },
     in_pool = REZZY.pool,
     loc_vars = REZZY.localization,
     calc_dollar_bonus = function(self,card)
@@ -193,6 +207,10 @@ SMODS.Joker{
     pos = {x = 1, y = 0},
     cost = 6,
     remove_from_deck = REZZY.remove,
+    pools = {
+        ["alljokers"] = true,
+        ["rezzies"] = true
+    },
     in_pool = REZZY.pool,
     loc_vars = REZZY.localization_x,
     calculate = function(self, card, context)
@@ -213,6 +231,10 @@ SMODS.Joker{
     cost = 10,
     soul_pos = {x = 3, y = 1 },
     remove_from_deck = REZZY.remove,
+    pools = {
+        ["alljokers"] = true,
+        ["rezzies"] = true
+    },
     in_pool = REZZY.pool,
     loc_vars = REZZY.localization,
     calculate = function(self, card, context)
@@ -237,6 +259,11 @@ SMODS.Joker{
     soul_pos = {x = 4, y = 1 },
     cost = 12,
     remove_from_deck = REZZY.remove,
+    pools = {
+        ["alljokers"] = true,
+        ["rezzies"] = true,
+        ["aliens"] = true
+    },
     in_pool = REZZY.pool,
     loc_vars = REZZY.localization_x,
     calculate = function(self, card, context)
@@ -256,6 +283,11 @@ SMODS.Joker {
     cost = 6,
     remove_from_deck = REZZY.remove,
     in_pool = REZZY.pool,
+    pools = {
+        ["alljokers"] = true,
+        ["rezzies"] = true,
+        ["ungraceful"] = true
+    },
     loc_vars = function(self, info_queue, card)
         return {
             vars = { card.ability.extra.rezzymainval }
@@ -272,20 +304,3 @@ SMODS.Joker {
         end
     end
 }
-
-UTIL.appendList(OCS.J.Ungraceful, { "j_ocs_rezzy_graceful" })
-
--- Write index information
-OCS.J.Rezzies = {
-    "j_ocs_rezzy_tail",
-    "j_ocs_rezzy_chips",
-    "j_ocs_rezzy_mult",
-    "j_ocs_rezzy_cash",
-    "j_ocs_rezzy_x",
-    "j_ocs_rezzy_legend",
-    "j_ocs_rezzy_offworld",
-    "j_ocs_rezzy_graceful",
-}
-
--- Append rezzies to central index
-UTIL.appendList(OCS.J.AllJokers, OCS.J.Rezzies)

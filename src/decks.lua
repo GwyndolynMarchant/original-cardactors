@@ -5,14 +5,6 @@ SMODS.Atlas {
 	path = "OCs-deck.png"
 }
 
--- Set up which Jokers can appear in decks ---------------
-for _, v in ipairs(OCS.J.AllJokers) do
-  if v ~= 'j_ocs_rezzy_legend' then
-    table.insert(OCS.J.Deck, v)
-  end
-end
--------------------------------------------------------------
-
 SMODS.Back {
 	key = "deck_cardactors",
 	loc_txt = {
@@ -25,12 +17,7 @@ SMODS.Back {
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				if G.jokers then
-					SMODS.add_card({
-						set = "Joker",
-						area = G.jokers,
-						key = pseudorandom_element(OCS.J.Deck, pseudoseed("ocsdeck")),
-						no_edition = true
-					})
+					SMODS.add_card({ set = "alljokers", area = G.jokers, no_edition = true })
 					return true
 				end
 			end,

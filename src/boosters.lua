@@ -5,17 +5,6 @@ SMODS.Atlas {
 	path = "OC-booster.png"
 }
 
--- Set up which Jokers can appear in boosters ---------------
-for _, v in ipairs(OCS.J.AllJokers) do
-  if v ~= 'j_ocs_rezzy_x' and v ~= 'j_ocs_rezzy_legend' then
-    table.insert(OCS.J.Booster, v)
-  end
-end
-for _, v in ipairs(OCS.J.Malverk) do
-  table.insert(OCS.J.Booster, v)
-end
--------------------------------------------------------------
-
 SMODS.Booster({
 	key = "actors",
 	loc_txt = {
@@ -31,8 +20,7 @@ SMODS.Booster({
   config = { extra = 4, choose = 1 },
   kind = "ocs_pack",
   create_card = function(self, card, i)
-      -- TODO: Need to stop duplicates from spawning
-      return {set = "Joker", area = G.jokers, key = pseudorandom_element(OCS.J.Booster, pseudoseed("ocspack")),  skip_materialize = true}
+      return { set = "alljokers", area = G.pack_cards, skip_materialize = true }
   end,
   loc_vars = function(self, info_queue, card)
       return { vars = { card.config.center.config.choose, card.ability.extra } }

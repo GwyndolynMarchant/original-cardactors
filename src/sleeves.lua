@@ -14,17 +14,15 @@ CardSleeves.Sleeve {
 			func = function()
 				if G.jokers then
 					SMODS.add_card({
-						set = "Joker",
+						set = "alljokers",
 						area = G.jokers,
-						key = pseudorandom_element(OCS.J.Deck, pseudoseed("ocjokers")),
 						no_edition = true
 					})
 					sendDebugMessage(CardSleeves.Sleeve.get_current_deck_key())
 					if CardSleeves.Sleeve.get_current_deck_key() == "b_ocs_deck_cardactors" then
 						SMODS.add_card({
-							set = "Joker",
+							set = "retextured",
 							area = G.jokers,
-							key = pseudorandom_element(OCS.J.Malverk, pseudoseed("ocjokers")),
 							no_edition = true
 						})
 					end

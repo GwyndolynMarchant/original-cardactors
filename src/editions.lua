@@ -27,6 +27,10 @@ OCS.E.Graceful.score_mod_max = {
 	dollars = 5,
 }
 
+SMODS.ObjectType {
+	key = "ungraceful",
+}
+
 SMODS.Edition {
 	key = "graceful",
 	shader = "graceful",

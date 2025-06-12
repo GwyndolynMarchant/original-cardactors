@@ -4,7 +4,9 @@ SMODS.Rarity {
     default_weight = 0.01
 }
 
-SMODS.Joker{
+SMODS.ObjectType { key = "aliens" }
+
+SMODS.Joker {
     key = "blackle",
     atlas = "ocjokers",
     pos = { x = 0, y = 1 },
@@ -13,6 +15,10 @@ SMODS.Joker{
     cost = 50,
     blueprint_compat = false,
     eternal_compat = false,
+    pools = {
+        ["alljokers"] = true,
+        ["aliens"] = true
+    },
     calculate = function(self, card, context)
         if context.joker_main then 
             G.STATE = G.STATES.GAME_OVER
@@ -29,6 +35,10 @@ SMODS.Joker {
     rarity = "ocs_alien",
     cost = 15,
     blueprint_compat = true,
+    pools = {
+        ["alljokers"] = true,
+        ["aliens"] = true
+    },
     calculate = function(self, card, context)
         if context.joker_main then return { mult = #SMODS.Mods } end
     end,
@@ -36,13 +46,3 @@ SMODS.Joker {
         return { vars = { #SMODS.mod_list }, }
     end
 }
-
--- Write index information
-OCS.J.Aliens = {
-    "j_ocs_blackle",
-    "j_ocs_qcc",
-    "j_ocs_rezzy_offworld",
-}
-
--- Append rezzies to central index
-UTIL.appendList(OCS.J.AllJokers, OCS.J.Aliens)

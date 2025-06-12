@@ -1,3 +1,14 @@
+SMODS.ObjectType {
+  key = "retextured",
+  default = "j_raised_fist",
+  cards = {
+    "j_vampire",
+    "j_raised_fist",
+    "j_todo_list",
+    "j_ring_master",
+  }
+}
+
 AltTexture({
   key = 'vampire_bat',
   set = 'Joker',
@@ -57,11 +68,3 @@ TexturePack({
   },
   localization = true
 })
-
--- Adding to index
-OCS.J.Malverk = {
-  'j_vampire',
-  'j_raised_fist',
-  'j_todo_list',
-  'j_ring_master'
-}
