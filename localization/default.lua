@@ -91,6 +91,13 @@ return {
                    "Destroys card.",
                    "{C:inactive}(Currently {}{X:mult,C:white} X#2# {}{C:inactive} Mult){}"
                 }
+            },
+            j_ocs_viz_gunpla = {
+                name = "Greebling",
+                text = {
+                    "Every played {C:attention}face{} card {C:attention}permanently{}",
+                    "gains {C:chips}+#1# Chips{} when scored"
+                }
             }
         },
         alt_texture = {
