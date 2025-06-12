@@ -210,55 +210,12 @@ SMODS.Joker{
     end
 }
 
-OCS.J.AllJokers = {
-    "j_ocs_billiesblunder",
-    "j_ocs_geniusjunebug",
-    "j_ocs_sybilthroat",
-}
-
--- Includes Alien rarity
-loadModule("src/jokers/aliens.lua")
-
-SMODS.Joker{
-    key = "robomoof",
-    rarity = 1,
-    atlas = 'ocjokers',
-    blueprint_compat = false,
-    pos = {x = 2, y = 0},
-    cost = 3,
-    config = {
-        extra = {
-            base_xmult = 1.5,
-            addt_xmult = 1.0
-        }
-    },
-    calculate = function(self, card, context)
-        if context.joker_main then
-            return {
-                xmult = card.ability.extra.base_xmult + (card.ability.extra.addt_xmult * (math.max(0, (find_number_moofs() - 1))))
-            }
-        end
-    end,
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = {
-                card.ability.extra.base_xmult + (card.ability.extra.addt_xmult * (math.max(0, (find_number_moofs() - 1)))),
-                card.ability.extra.addt_xmult,
-                card.ability.extra.base_xmult
-            }
-        }
-    end,
-    in_pool = function(self)
-        return next(SMODS.find_card("j_ring_master")) and true or false
-    end
-}
-
 SMODS.Joker {
     key = "viz_hoard",
     rarity = 3,
     atlas = 'ocjokers',
     blueprint_compat = true,
-    pos = { x = 0, y = 1 },
+    pos = { x = 0, y = 2 },
     cost = 9,
     config = {
         extra = {
@@ -296,7 +253,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'ocjokers',
     blueprint_compat = true,
-    pos = { x = 1, y = 1},
+    pos = { x = 1, y = 2 },
     cost = 5,
     config = {
         extra = 10
@@ -322,6 +279,18 @@ SMODS.Joker {
         }
     end
 }
+
+OCS.J.AllJokers = {
+    "j_ocs_billiesblunder",
+    "j_ocs_geniusjunebug",
+    "j_ocs_sybilthroat",
+    "j_ocs_viz_hoard",
+    "j_ocs_viz_gunpla",
+}
+
+-- Includes Alien rarity
+loadModule("src/jokers/aliens.lua")
+
 -- Species
 loadModule("src/jokers/rezzies.lua")
 loadModule("src/jokers/moofs.lua")
