@@ -219,6 +219,109 @@ OCS.J.AllJokers = {
 -- Includes Alien rarity
 loadModule("src/jokers/aliens.lua")
 
+SMODS.Joker{
+    key = "robomoof",
+    rarity = 1,
+    atlas = 'ocjokers',
+    blueprint_compat = false,
+    pos = {x = 2, y = 0},
+    cost = 3,
+    config = {
+        extra = {
+            base_xmult = 1.5,
+            addt_xmult = 1.0
+        }
+    },
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                xmult = card.ability.extra.base_xmult + (card.ability.extra.addt_xmult * (math.max(0, (find_number_moofs() - 1))))
+            }
+        end
+    end,
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                card.ability.extra.base_xmult + (card.ability.extra.addt_xmult * (math.max(0, (find_number_moofs() - 1)))),
+                card.ability.extra.addt_xmult,
+                card.ability.extra.base_xmult
+            }
+        }
+    end,
+    in_pool = function(self)
+        return next(SMODS.find_card("j_ring_master")) and true or false
+    end
+}
+
+SMODS.Joker {
+    key = "viz_hoard",
+    rarity = 3,
+    atlas = 'ocjokers',
+    blueprint_compat = true,
+    pos = { x = 0, y = 1 },
+    cost = 9,
+    config = {
+        extra = {
+            xmult = 1.0,
+            addt = 0.25
+        }
+    },
+    calculate = function(self, card, context)
+        if context.destroy_card and context.cardarea == G.play then
+            if SMODS.has_enhancement(context.destroy_card, "m_gold") then
+                return {
+                    remove = true
+                }
+            end
+        elseif context.remove_playing_cards and #context.removed > 0 then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.addt * #context.removed
+        elseif context.joker_main then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end,
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                card.ability.extra.addt,
+                card.ability.extra.xmult
+            }
+        }
+    end,
+}
+
+SMODS.Joker {
+    key = "viz_gunpla",
+    rarity = 2,
+    atlas = 'ocjokers',
+    blueprint_compat = true,
+    pos = { x = 1, y = 1},
+    cost = 5,
+    config = {
+        extra = 10
+    },
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_face(false) then
+            if not context.other_card.ability then
+                context.other_card.ability = { perma_bonus = self.ability.extra }
+                sendDebugMessage("Ability not set, had to be manually set.", "OCs")
+            else
+                context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus or 0
+                context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + card.ability.extra
+            end
+            return {
+                extra = {message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
+                colour = G.C.CHIPS
+            }
+        end
+    end,
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra }
+        }
+    end
+}
 -- Species
 loadModule("src/jokers/rezzies.lua")
 loadModule("src/jokers/moofs.lua")

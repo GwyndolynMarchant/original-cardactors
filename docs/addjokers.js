@@ -109,6 +109,25 @@ let jokers = [
     image_url: "img/YCH.png",
     rarity: "Uncommon"
   },
+  {
+    name: "Hoarding Problem",
+    text: [
+     "This Joker gains {X:mult,C:white}X0.25{} Mult",
+     "per scoring {C:attention}Gold{} card played.",
+     "Destroys card.",
+    ],
+    image_url: "img/hoarding problem.png",
+    rarity: "Rare"
+  },
+  {
+    name: "Greebling",
+    text: [
+      "Every played {C:attention}face{} card {C:attention}permanently{}",
+      "gains {C:chips}+10 Chips{} when scored"
+    ],
+    image_url: "img/greebling.png",
+    rarity: "Uncommon"
+  },
   // {
   //   name: "",
   //   text: [
