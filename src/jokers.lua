@@ -167,14 +167,19 @@ SMODS.Joker{
                 context.other_card:juice_up()
 
                 local delta = {}
-                if (not context.other_card.edition or context.other_card.edition.type ~= card.ability.extra.capcard.edition.type) then delta["EDITION"] = true end
-                if (context.other_card.seal ~= card.ability.extra.capcard.seal) then delta["SEAL"] = true end
-                if (context.other_card.base.value ~= card.ability.extra.capcard.base.value) then delta["RANK"] = true end
-                if (context.other_card.base.suit ~= card.ability.extra.capcard.base.suit) then delta["SUIT"] = true end
-                if (context.other_card.ability.name ~= card.ability.extra.capcard.ability.name) then delta["ABILITY"] = true end
+                if
+                    not context.other_card.edition
+                or  not card.ability.extra.capcard.edition
+                or  context.other_card.edition.type ~= card.ability.extra.capcard.edition.type
+                then
+                    table.insert(delta, "EDITION")
+                end
+                if (context.other_card.seal ~= card.ability.extra.capcard.seal) then table.insert(delta, "SEAL") end
+                if (context.other_card.base.value ~= card.ability.extra.capcard.base.value) then table.insert(delta, "RANK") end
+                if (context.other_card.base.suit ~= card.ability.extra.capcard.base.suit) then table.insert(delta, "SUIT") end
+                if (context.other_card.ability.name ~= card.ability.extra.capcard.ability.name) then table.insert(delta, "ABILITY") end
 
-                local _, e = pseudorandom_element(delta, pseudoseed("sybilthroat"))
-                sendDebugMessage("Element chose: " .. e)
+                local e = pseudorandom_element(delta, pseudoseed("sybilthroat"))
 
                 if e == "EDITION" then context.other_card:set_edition(card.ability.extra.capcard.edition)
                 elseif e == "SEAL" then context.other_card:set_seal(card.ability.extra.capcard.seal)
@@ -191,6 +196,10 @@ SMODS.Joker{
                             context.other_card.ability[k] = v
                         end
                     end
+                else
+                    return {
+                        message = "I'm me!"
+                    }
                 end
 
                 return {
