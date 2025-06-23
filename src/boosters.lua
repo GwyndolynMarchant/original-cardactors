@@ -27,7 +27,7 @@ SMODS.Booster({
   end,
 	ease_background_colour = function(self)
 		ease_colour(G.C.DYN_UI.MAIN, OCS.Color.pink)
-		ease_background_colour({ new_colour = OCS.Color.pink, special_colour = OCS.Color.black, contrast = 4 })
+		ease_background_colour({ new_colour = OCS.C.PINK, special_colour = OCS.C.BLACK, contrast = 4 })
 	end
 })
 

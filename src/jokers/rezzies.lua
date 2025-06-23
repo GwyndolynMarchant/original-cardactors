@@ -152,9 +152,9 @@ SMODS.Joker{
     key = "rezzy_mult",
     rarity = 1,
     atlas = 'rezzies',
+    pos = {x = 2, y = 0},
     blueprint_compat = true,
     config = {extra = {rezzymainval = 4,rezzyminval = 4, rezzymaxval = 20}},
-    pos = {x = 2, y = 0},
     cost = 3,
     remove_from_deck = REZZY.remove,
     pools = {

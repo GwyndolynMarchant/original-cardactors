@@ -157,6 +157,9 @@ SMODS.Joker{
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
+            -- TODO: Sybil is capturing too early!
+            -- Violates left-to-right execution order vs cards like Hoarding Problem, Vampire, etc.
+            -- Need to set destroyed-by?
             if #G.play.cards == 1 then
 
                 -- Copy the card
@@ -239,8 +242,8 @@ SMODS.Joker {
     key = "viz_hoard",
     rarity = 3,
     atlas = 'ocjokers',
-    blueprint_compat = true,
     pos = { x = 0, y = 2 },
+    blueprint_compat = true,
     cost = 9,
     pools = {
         ["alljokers"] = true
@@ -253,6 +256,7 @@ SMODS.Joker {
     },
     calculate = function(self, card, context)
         if context.destroy_card and context.cardarea == G.play then
+            -- TODO: Need to set destroyed-by?
             if SMODS.has_enhancement(context.destroy_card, "m_gold") then
                 return {
                     remove = true

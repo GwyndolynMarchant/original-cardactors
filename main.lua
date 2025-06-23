@@ -12,9 +12,9 @@ ocConfig = SMODS.current_mod.config
 -- Global lists necessary for module interoperability
 OCS = {
   E = {},
-  Color = {
-    pink = HEX('D500B8'),
-    black = HEX('000000')
+  C = {
+    PINK = HEX('D500B8'),
+    BLACK = HEX('000000')
   },
 }
 
@@ -50,3 +50,6 @@ end
 if (SMODS.Mods["CardSleeves"] or {}).can_load then
   loadModule("src/sleeves.lua")
 end
+
+-- Credits, Config, etc.
+loadModule("src/credits.lua") -- Credits tabs
