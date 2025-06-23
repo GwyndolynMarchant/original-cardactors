@@ -1,4 +1,4 @@
-let jokers = [
+const jokers = [
   {
     name: "Billie's Blunder",
     text: [
@@ -31,7 +31,7 @@ let jokers = [
   {
     name: "Chippy Rezzy",
     text: [
-        "{C:chips}+1?{} chips.",
+        "{C:chips}+?{} chips.",
         "Generates a Tail when ",
         "destroyed or sold"
     ],
@@ -41,7 +41,7 @@ let jokers = [
   {
     name: "Rhythm Rezzy",
     text: [
-        "{C:mult}+1?{} mult.",
+        "{C:mult}+?{} mult.",
         "Generates a Tail when ",
         "destroyed or sold"
     ],
@@ -51,7 +51,7 @@ let jokers = [
   {
     name: "Ritzy Rezzy",
     text: [
-        "Earn {C:money}+1?{} at",
+        "Earn {C:money}+?{} at",
         "end of round.",
         "Generates a Tail when ",
         'destroyed or sold'
@@ -62,7 +62,7 @@ let jokers = [
   {
     name: "X Rated Rezzy",
     text: [
-        "{X:mult,C:white}X1?{} Mult",
+        "{X:mult,C:white}X?{} Mult",
         "Generates a Tail when ",
         'destroyed or sold'
     ],
@@ -80,6 +80,32 @@ let jokers = [
     back_url: "img/rezzy-legend-back.png",
     face_url: "img/rezzy-legend-front.png",
     rarity: "Legendary"
+  },
+  {
+    name: "Graceful Rezzy",
+    text: [
+      'Does {C:edition,E:1}something{}',
+      '{C:attention}?{} times more powerful',
+      'than a {C:attention}graceful{} card.',
+      "Generates a {C:attention}Tail{} when",
+      "destroyed or sold",
+      "Cannot be further {C:attention}graced{}."
+    ],
+    image_url: "img/graceful.png",
+    rarity: "Rare"
+  },
+  {
+    name: "Offworld Rezzy",
+    soul: true,
+    text: [
+      "{C:inactive}From negative space...{}",
+      "{X:chips,C:white}X?{} Chips",
+      "Generates a {C:attention}Tail{} when",
+      "destroyed or sold"
+    ],
+    back_url: "img/offworld-bg.png",
+    face_url: "img/offworld-fg.png",
+    rarity: "Alien"
   },
   {
     name: "Scandalous Sybil Throat",
@@ -102,12 +128,14 @@ let jokers = [
     rarity: "Common"
   },
   {
-    name: "More to come...",
+    name: "Torchstone",
     text: [
-      "<a href='commissions.html'>Maybe you?</a>"
+      "Gives {C:mult}+4{} Mult.",
+      "Increases by {C:mult}+8{} per",
+      "additional {C:attention}Moof{}.",
     ],
-    image_url: "img/YCH.png",
-    rarity: "Uncommon"
+    image_url: "img/torchstone.png",
+    rarity: "Common"
   },
   {
     name: "Hoarding Problem",
@@ -128,6 +156,29 @@ let jokers = [
     image_url: "img/greebling.png",
     rarity: "Uncommon"
   },
+  {
+    name: "Blackle Mori",
+    soul: true,
+    text: [
+      "{C:inactive}I would rather be{}",
+      "{C:inactive}on IFDB.org...{}",
+      "Do not play."
+    ],
+    back_url: "img/blackle-bg.png",
+    face_url: "img/blackle-fg.png",
+    rarity: "Alien"
+  },
+  {
+    name: "Quecey",
+    soul: true,
+    text: [
+      "{C:mult}+n{} Mult.",
+      "{C:inactive}Loves mods!{}"
+    ],
+    back_url: "img/qcc-bg.png",
+    face_url: "img/qcc-fg.png",
+    rarity: "Alien"
+  },
   // {
   //   name: "",
   //   text: [
@@ -136,9 +187,17 @@ let jokers = [
   //   image_url: "img/",
   //   rarity: "Common"
   // },
+  {
+    name: "More to come...",
+    text: [
+      "<a href='commissions.html'>Maybe you?</a>"
+    ],
+    image_url: "img/YCH.png",
+    rarity: "Uncommon"
+  },
 ]
 
-let textures = [
+const textures = [
   {
     name: "Rebel Against Judgement",
     text: [
@@ -184,6 +243,15 @@ let textures = [
     image_url: "img/showgirl.png",
     rarity: "Common"
   },
+  {
+    name: "Suricrasia",
+    text: [
+      "Reskin of {C:PLANET}Eris{}",
+      "{C:ATTENTION}Requires Malverk{}"
+    ],
+    image_url: "img/suricrasia.png",
+    rarity: "Planet"
+  },
   // {
   //   name: "",
   //   text: [
@@ -194,7 +262,37 @@ let textures = [
   // },
 ]
 
-let vouchers = [
+const spectrals = [
+  {
+    name: "Launch",
+    text: [
+      '{C:red,E:2}Destroy all{} jokers and',
+      'cards in hand. {C:attention}Summon{}',
+      'an {X:black,C:white}Alien{}'
+    ],
+    image_url: "img/launch.png",
+    rarity: "Spectral"
+  },
+  {
+    name: "Install",
+    text: [
+      '{C:attention}Infect{} one joker or',
+      'card with {C:edition,E:1}Graceful{}'
+    ],
+    image_url: "img/install.png",
+    rarity: "Spectral"
+  },
+  // {
+  //   name: "",
+  //   text: [
+  //     ""
+  //   ],
+  //   image_url: "img/",
+  //   rarity: "Spectral"
+  // },
+]
+
+const vouchers = [
   {
     name: "Balinological Technical Institute",
     text: [
@@ -215,7 +313,7 @@ let vouchers = [
   },
 ]
 
-let core_items = [
+const core_items = [
   {
     name: "Original Cardactors",
     text: [
@@ -244,7 +342,7 @@ let core_items = [
   },
 ]
 
-let cols = {
+const cols = {
   
   MULT: "#FE5F55",
   CHIPS: "#009dff",
@@ -268,9 +366,7 @@ let cols = {
   GREY: "#5f7377",
   CHANCE: "#4BC292",
   JOKER_GREY: "#bfc7d5",
-  VOUCHER: "#cb724c",
   BOOSTER: "#646eb7",
-  EDITION: "#ffffff",
   DARK_EDITION: "#5d5dff",
   ETERNAL: "#c75985",
   INACTIVE: "#ffffff99",
@@ -287,11 +383,12 @@ let cols = {
   EDITION: "#4ca893",
 }
 
-let rarities = {
+const rarities = {
   "Common": "#009dff", 
   "Uncommon": "#4BC292",
   "Rare": "#fe5f55",
   "Legendary": "#b26cbb",
+  "Alien": "#222",
   "Joker": "#708b91",
   "Tarot": "#a782d1",
   "Planet": "#13afce",
@@ -310,7 +407,7 @@ let rarities = {
 
 regex = /{([^}]+)}/g;
 
-let add_cards_to_div = (jokers, jokers_div) => {
+const add_cards_to_div = (jokers, jokers_div) => {
   for (let joker of jokers) {
     console.log("adding joker", joker.name);
   
@@ -337,7 +434,7 @@ let add_cards_to_div = (jokers, jokers_div) => {
   
     let joker_div = document.createElement("div");
     joker_div.classList.add("joker");
-    if (joker.rarity === "Sticker" || joker.rarity == "Seal") {
+    if (joker.rarity === "Sticker" || joker.rarity === "Seal") {
       joker_div.innerHTML = `
         <h3>${joker.name}</h3>
         <img src="${joker.image_url}" alt="${joker.name}" class="hasback" />
@@ -381,6 +478,7 @@ function fillSection(items, name) {
 }
 
 fillSection(jokers, "jokers");
+fillSection(spectrals, "spectrals");
 fillSection(textures, "textures");
 fillSection(vouchers, "vouchers");
 fillSection(core_items, "coreitems");
