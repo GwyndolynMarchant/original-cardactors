@@ -102,8 +102,7 @@ SMODS.Joker{
         if context.joker_main then
             local xmult = (get_joker_win_sticker(self,true) + 1) * (card.ability.extra.xmult_mod) + 1
             return {
-                mult_mod = xmult,
-                message = localize { type = 'variable', key = 'a_mult', vars = { xmult } }
+                xmult = xmult
             }
         end
     end
