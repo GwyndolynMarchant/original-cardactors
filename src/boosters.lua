@@ -20,15 +20,14 @@ SMODS.Booster({
   config = { extra = 4, choose = 1 },
   kind = "ocs_pack",
   create_card = function(self, card, i)
-      local cardlist = get_usable_oc_cards()
-      return {set = "Joker", area = G.jokers, key = pseudorandom_element(cardlist, pseudoseed("ocspack")),  skip_materialize = true}
+      return { set = "alljokers", area = G.pack_cards, skip_materialize = true }
   end,
   loc_vars = function(self, info_queue, card)
       return { vars = { card.config.center.config.choose, card.ability.extra } }
   end,
 	ease_background_colour = function(self)
-		ease_colour(G.C.DYN_UI.MAIN, globals.OC_colors.pink)
-		ease_background_colour({ new_colour = globals.OC_colors.pink, special_colour = globals.OC_colors.black, contrast = 4 })
+		ease_colour(G.C.DYN_UI.MAIN, OCS.Color.pink)
+		ease_background_colour({ new_colour = OCS.C.PINK, special_colour = OCS.C.BLACK, contrast = 4 })
 	end
 })
 

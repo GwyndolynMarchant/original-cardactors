@@ -17,12 +17,7 @@ SMODS.Back {
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				if G.jokers then
-					SMODS.add_card({
-						set = "Joker",
-						area = G.jokers,
-						key = pseudorandom_element(globals.OC_jokers, pseudoseed("ocsdeck")),
-						no_edition = true
-					})
+					SMODS.add_card({ set = "alljokers", area = G.jokers, no_edition = true })
 					return true
 				end
 			end,

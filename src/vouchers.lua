@@ -62,7 +62,7 @@ SMODS.Voucher {
 							shop_joker:set_edition(edition, true, true)
 							shop_joker.ability.couponed = true
 							shop_joker.temp_edition = nil
-							shop_joker:juice_up() -- TODO: Not sure if there's a way we can replicate the vanilla generation effect?
+							shop_joker:juice_up()
 						end
 					end
 				end

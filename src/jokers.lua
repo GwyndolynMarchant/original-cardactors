@@ -5,6 +5,13 @@ SMODS.Atlas {
     py = 95
 }
 
+-- All Jokers
+SMODS.ObjectType {
+    key = "alljokers",
+    default = "j_ocs_rezzy_tail",
+}
+
+
 -- Billie's Blunder
 SMODS.Joker {
     key = 'billiesblunder',
@@ -23,6 +30,9 @@ SMODS.Joker {
     atlas = 'ocjokers',
     pos = { x = 0, y = 0 },
     cost = 4,
+    pools = {
+        ["alljokers"] = true
+    },
     eternal_compat = true,
     perishable_compat = true,
     blueprint_compat = true,
@@ -77,23 +87,26 @@ SMODS.Joker{
     end,
     rarity = 2,
     atlas = 'junebug',
-    pos = { x = 0, y = 0 }, -- TODO: Dynamically change X based on stake beaten
+    pos = { x = 0, y = 0 },
     cost = 5,
+    pools = {
+        ["alljokers"] = true
+    },
     eternal_compat = true,
     perishable_compat = true,
     blueprint_compat = true,
+    set_sprites = function(self, card, front)
+        card.children.center:set_sprite_pos({ x = get_joker_win_sticker(self,true) or 0, y = 0 })
+    end,
     calculate = function(self, card, context)
         if context.joker_main then
             local xmult = (get_joker_win_sticker(self,true) + 1) * (card.ability.extra.xmult_mod) + 1
             return {
-                mult_mod = xmult,
-                message = localize { type = 'variable', key = 'a_mult', vars = { xmult } }
+                xmult = xmult
             }
         end
     end
 }
-
-loadModule("src/jokers/rezzies.lua")
 
 SMODS.Joker{
     key = "sybilthroat",
@@ -107,6 +120,9 @@ SMODS.Joker{
     },
     pos = {x = 1, y = 0},
     cost = 9,
+    pools = {
+        ["alljokers"] = true
+    },
     loc_vars = function(self, info_queue, card)
         if card.ability.extra.capcard == nil then
             return {
@@ -140,6 +156,9 @@ SMODS.Joker{
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
+            -- TODO: Sybil is capturing too early!
+            -- Violates left-to-right execution order vs cards like Hoarding Problem, Vampire, etc.
+            -- Need to set destroyed-by?
             if #G.play.cards == 1 then
 
                 -- Copy the card
@@ -218,60 +237,16 @@ SMODS.Joker{
     end
 }
 
-local moofs = {
-    "j_ocs_robomoof"
-}
-
-function find_number_moofs()
-    local n = 0
-    for index, value in ipairs(moofs) do
-        local m = SMODS.find_card(value, false)
-        n = n + #m
-    end
-    return n
-end
-
-SMODS.Joker{
-    key = "robomoof",
-    rarity = 1,
-    atlas = 'ocjokers',
-    blueprint_compat = false,
-    pos = {x = 2, y = 0},
-    cost = 3,
-    config = {
-        extra = {
-            base_xmult = 1.5,
-            addt_xmult = 1.0
-        }
-    },
-    calculate = function(self, card, context)
-        if context.joker_main then
-            return {
-                xmult = card.ability.extra.base_xmult + (card.ability.extra.addt_xmult * (math.max(0, (find_number_moofs() - 1))))
-            }
-        end
-    end,
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = {
-                card.ability.extra.base_xmult + (card.ability.extra.addt_xmult * (math.max(0, (find_number_moofs() - 1)))),
-                card.ability.extra.addt_xmult,
-                card.ability.extra.base_xmult
-            }
-        }
-    end,
-    in_pool = function(self)
-        return next(SMODS.find_card("j_ring_master")) and true or false
-    end
-}
-
 SMODS.Joker {
     key = "viz_hoard",
     rarity = 3,
     atlas = 'ocjokers',
+    pos = { x = 0, y = 2 },
     blueprint_compat = true,
-    pos = { x = 0, y = 1 },
     cost = 9,
+    pools = {
+        ["alljokers"] = true
+    },
     config = {
         extra = {
             xmult = 1.0,
@@ -280,6 +255,7 @@ SMODS.Joker {
     },
     calculate = function(self, card, context)
         if context.destroy_card and context.cardarea == G.play then
+            -- TODO: Need to set destroyed-by?
             if SMODS.has_enhancement(context.destroy_card, "m_gold") then
                 return {
                     remove = true
@@ -308,8 +284,11 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'ocjokers',
     blueprint_compat = true,
-    pos = { x = 1, y = 1},
+    pos = { x = 1, y = 2 },
     cost = 5,
+    pools = {
+        ["alljokers"] = true
+    },
     config = {
         extra = 10
     },
@@ -334,3 +313,10 @@ SMODS.Joker {
         }
     end
 }
+
+-- Includes Alien rarity
+loadModule("src/jokers/aliens.lua")
+
+-- Species
+loadModule("src/jokers/rezzies.lua")
+loadModule("src/jokers/moofs.lua")
