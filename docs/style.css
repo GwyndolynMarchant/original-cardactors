@@ -106,6 +106,12 @@ img.hasback {
   animation-timing-function: steps(20, start);
 }
 
+.pill {
+  padding: 2px 4px 4px 4px;
+  border-radius: 8px;
+  box-shadow: 0px 4px #0003;
+}
+
 a.download {
   position: relative;
   background-color: #374244;
