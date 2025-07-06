@@ -251,9 +251,17 @@ return {
     misc = {
         achievement_names = {
             ach_ocs_hyena = "HYENA",
+            ach_ocs_vizday = "Hearthsmas!",
+            ach_ocs_blackle = "I don't want to be here!",
+            ach_ocs_rezzy_evo_grace = "Graceful Rezzy",
+            ach_ocs_rezzy_evo_alien = "Offworld Rezzy",
         },
         achievement_descriptions = {
-            ach_ocs_hyena = "Get all HYENA jokers (Hint: Malverk!)"
+            ach_ocs_hyena = "Get all HYENA jokers (Hint: Malverk!)",
+            ach_ocs_vizday = "A dragon and a drabit...",
+            ach_ocs_blackle = "Blackle only agreed to show up...",
+            ach_ocs_rezzy_evo_grace = "Mutate a tail with gracefulness.",
+            ach_ocs_rezzy_evo_alien = "Mutate a tail with negative space.",
         },
         dictionary = {
             e_ready = "Ready!",

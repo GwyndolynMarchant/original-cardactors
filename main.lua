@@ -14,8 +14,16 @@ OCS = {
   E = {},
   C = {
     PINK = HEX('D500B8'),
-    BLACK = HEX('000000')
+    BLACK = HEX('000000'),
   },
+  A = {
+    REZZY = {
+      EVO = {
+        alien = false,
+        grace = false
+      }
+    }
+  }
 }
 
 function loadModule(module)

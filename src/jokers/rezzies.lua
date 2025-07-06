@@ -61,6 +61,7 @@ SMODS.Joker{
                             blockable = false,
                             func = function () return REZZY.create('j_ocs_rezzy_offworld') end
                         }))
+                        OCS.A.REZZY.EVO.alien = true
                     elseif UTIL.E.GetEditionFromCard(card) == "ocs_graceful" then
                         G.E_MANAGER:add_event(Event({
                             trigger = 'after',
@@ -68,6 +69,7 @@ SMODS.Joker{
                             blockable = false,
                             func = function () return REZZY.create('j_ocs_rezzy_graceful') end
                         }))
+                        OCS.A.REZZY.EVO.grace = true
                     else
                         G.E_MANAGER:add_event(Event({
                             trigger = 'after',
