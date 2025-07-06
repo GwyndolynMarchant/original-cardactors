@@ -8,7 +8,11 @@
 	"badge_colour": "d500b8",
 	"badge_text_colour": "000000",
 	"display_name": "OCs",
+<<<<<<< HEAD
 	"version": "1.2.0",
+=======
+	"version": "1.2.1~beta",
+>>>>>>> dev
 	"dependencies": [
 		"Steamodded (>=1.*~)"
 	]
