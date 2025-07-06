@@ -26,7 +26,7 @@ SMODS.Booster({
       return { vars = { card.config.center.config.choose, card.ability.extra } }
   end,
 	ease_background_colour = function(self)
-		ease_colour(G.C.DYN_UI.MAIN, OCS.Color.pink)
+		ease_colour(G.C.DYN_UI.MAIN, OCS.C.PINK)
 		ease_background_colour({ new_colour = OCS.C.PINK, special_colour = OCS.C.BLACK, contrast = 4 })
 	end
 })
